@@ -18,7 +18,7 @@
 
 abstract GitLabType
 
-typealias GitLabString Compat.UTF8String
+mutable structalias GitLabString Compat.UTF8String
 
 function @compat(Base.:(==))(a::GitLabType, b::GitLabType)
     if typeof(a) != typeof(b)
@@ -51,7 +51,7 @@ name(g::GitLabType) = get(namefield(g))
 function extract_nullable{T}(data::Dict, key, ::Type{T})
     if haskey(data, key)
         val = data[key]
-        if !(isa(val, Void))
+        if !(isa(val, Nothing))
             if T <: Vector
                 V = eltype(T)
                 return Nullable{T}(V[prune_gitlab_value(v, V) for v in val])
@@ -98,7 +98,7 @@ end
 #############################################
 
 gitlab2json(val) = val
-gitlab2json(uri::HttpCommon.URI) = string(uri)
+gitlab2json(uri::HTTP.URI) = string(uri)
 gitlab2json(dt::Dates.DateTime) = string(dt) * "Z"
 gitlab2json(v::Vector) = [gitlab2json(i) for i in v]
 

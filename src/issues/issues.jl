@@ -2,7 +2,7 @@
 # Issue type #
 ##############
 
-type Issue <: GitLabType
+mutable struct Issue <: GitLabType
     id::Nullable{Int}
     iid::Nullable{Int}
     project_id::Nullable{Int}
@@ -23,11 +23,11 @@ type Issue <: GitLabType
     closed_by::Nullable{Owner}
     closed_at::Nullable{Dates.DateTime}
     pull_request::Nullable{PullRequest}
-    url::Nullable{HttpCommon.URI}
-    html_url::Nullable{HttpCommon.URI}
-    labels_url::Nullable{HttpCommon.URI}
-    comments_url::Nullable{HttpCommon.URI}
-    events_url::Nullable{HttpCommon.URI}
+    url::Nullable{HTTP.URI}
+    html_url::Nullable{HTTP.URI}
+    labels_url::Nullable{HTTP.URI}
+    comments_url::Nullable{HTTP.URI}
+    events_url::Nullable{HTTP.URI}
     locked::Nullable{Bool}
 =#
 end

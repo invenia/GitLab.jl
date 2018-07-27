@@ -4,7 +4,7 @@
 
 
 
-type Content <: GitLabType
+mutable struct Content <: GitLabType
     file_name::Nullable{GitLabString}
     file_path::Nullable{GitLabString}
     size::Nullable{Int}
@@ -19,10 +19,10 @@ type Content <: GitLabType
     typ::Nullable{GitLabString}
     name::Nullable{GitLabString}
     target::Nullable{GitLabString}
-    url::Nullable{HttpCommon.URI}
-    git_url::Nullable{HttpCommon.URI}
-    html_url::Nullable{HttpCommon.URI}
-    download_url::Nullable{HttpCommon.URI}
+    url::Nullable{HTTP.URI}
+    git_url::Nullable{HTTP.URI}
+    html_url::Nullable{HTTP.URI}
+    download_url::Nullable{HTTP.URI}
 =#
 end
 
@@ -73,7 +73,7 @@ function permalink(content::Content, commit)
     prefix = get(content.typ) == "file" ? "blob" : "tree"
     rgx = Regex(string("\/", prefix, "\/.*?\/"))
     replacement = string("/", prefix, "/", name(commit), "/")
-    return HttpCommon.URI(replace(url, rgx, replacement))
+    return HTTP.URI(replace(url, rgx, replacement))
 end
 
 ###########################

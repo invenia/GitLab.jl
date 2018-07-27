@@ -2,11 +2,11 @@
 # Repo Type #
 #############
 
-type Repo <: GitLabType
+mutable struct Repo <: GitLabType
     name::Nullable{GitLabString}
     visibility_level::Nullable{Int}
-    homepage::Nullable{HttpCommon.URI}
-    git_http_url::Nullable{HttpCommon.URI}
+    homepage::Nullable{HTTP.URI}
+    git_http_url::Nullable{HTTP.URI}
     description::Nullable{GitLabString}
     project_id::Nullable{Int}
 
@@ -15,9 +15,9 @@ type Repo <: GitLabType
     tag_list::Nullable{Vector{GitLabString}}
     public::Nullable{Bool}
     archived::Nullable{Bool}
-    ## TODO FIX ssh_url_to_repo::Nullable{HttpCommon.URI}
-    http_url_to_repo::Nullable{HttpCommon.URI}
-    web_url::Nullable{HttpCommon.URI}
+    ## TODO FIX ssh_url_to_repo::Nullable{HTTP.URI}
+    http_url_to_repo::Nullable{HTTP.URI}
+    web_url::Nullable{HTTP.URI}
     owner::Nullable{Owner}
     name_with_namespace::Nullable{GitLabString}
     path::Nullable{GitLabString}
@@ -34,7 +34,7 @@ type Repo <: GitLabType
     creator_id::Nullable{Int}
     ## TODO FIX namespace::Nullable{Namespace}
     ## \"namespace\":{\"id\":2,\"name\":\"mdpradeep\",\"path\":\"mdpradeep\",\"owner_id\":2,\"created_at\":\"2016-06-17T07:09:56.494Z\",\"updated_at\":\"2016-06-17T07:09:56.494Z\",\"description\":\"\",\"avatar\":null,\"share_with_group_lock\":false,\"visibility_level\":20}
-    avatar_url::Nullable{HttpCommon.URI}
+    avatar_url::Nullable{HTTP.URI}
     star_count::Nullable{Int}
     forks_count::Nullable{Int}
     open_issues_count::Nullable{Int}

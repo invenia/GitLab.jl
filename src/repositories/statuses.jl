@@ -2,15 +2,15 @@
 # Status type #
 ###############
 
-type Status <: GitLabType
+mutable struct Status <: GitLabType
     id::Nullable{Int}
     total_count::Nullable{Int}
     state::Nullable{GitLabString}
     description::Nullable{GitLabString}
     context::Nullable{GitLabString}
     sha::Nullable{GitLabString}
-    url::Nullable{HttpCommon.URI}
-    target_url::Nullable{HttpCommon.URI}
+    url::Nullable{HTTP.URI}
+    target_url::Nullable{HTTP.URI}
     created_at::Nullable{Dates.DateTime}
     updated_at::Nullable{Dates.DateTime}
     creator::Nullable{Owner}

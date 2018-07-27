@@ -4,11 +4,11 @@
 
 abstract Authorization
 
-immutable OAuth2 <: Authorization
+struct OAuth2 <: Authorization
     token::GitLabString
 end
 
-immutable AnonymousAuth <: Authorization end
+struct AnonymousAuth <: Authorization end
 
 ###############
 # API Methods #

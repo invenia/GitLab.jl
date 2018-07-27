@@ -2,7 +2,7 @@
 # PullRequest Type #
 ####################
 
-type PullRequest <: GitLabType
+mutable struct PullRequest <: GitLabType
     id::Nullable{Int}
     iid::Nullable{Int}
     project_id::Nullable{Int}
@@ -40,8 +40,8 @@ type PullRequest <: GitLabType
     merge_commit_sha::Nullable{GitLabString}
     closed_at::Nullable{Dates.DateTime}
     merged_at::Nullable{Dates.DateTime}
-    url::Nullable{HttpCommon.URI}
-    html_url::Nullable{HttpCommon.URI}
+    url::Nullable{HTTP.URI}
+    html_url::Nullable{HTTP.URI}
     merged_by::Nullable{Owner}
     _links::Nullable{Dict}
     mergeable::Nullable{Bool}

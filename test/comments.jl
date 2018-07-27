@@ -64,7 +64,7 @@ listener = GitLab.CommentListener(trigger; auth = myauth) do event, phrase
     # send the comment creation request to GitLab
     GitLab.create_comment(event.repository, reply_to, comment_kind; headers = options, params = comment_params)
 
-    return HttpCommon.Response(200)
+    return HTTP.Response(200)
 end
 
 # Start the listener on localhost at port 8000

@@ -2,7 +2,7 @@
 # Comment Type #
 ################
 
-type Comment <: GitLabType
+mutable struct Comment <: GitLabType
     noteable_type::Nullable{GitLabString}
     ## created_at::Nullable{Dates.DateTime}
     created_at::Nullable{GitLabString}
@@ -14,7 +14,7 @@ type Comment <: GitLabType
     noteable_id::Nullable{Int64}
     commit_id::Nullable{GitLabString}
     system::Nullable{Bool}
-    url::Nullable{HttpCommon.URI}
+    url::Nullable{HTTP.URI}
     is_award::Nullable{Bool}
     st_diff::Nullable{GitLabString}
     id::Nullable{Int64}
@@ -31,9 +31,9 @@ type Comment <: GitLabType
     original_commit_id::Nullable{GitLabString}
     original_position::Nullable{Int}
     position::Nullable{Int}
-    html_url::Nullable{HttpCommon.URI}
-    issue_url::Nullable{HttpCommon.URI}
-    pull_request_url::Nullable{HttpCommon.URI}
+    html_url::Nullable{HTTP.URI}
+    issue_url::Nullable{HTTP.URI}
+    pull_request_url::Nullable{HTTP.URI}
     user::Nullable{Owner}
 =#
 

@@ -1,16 +1,32 @@
+__precompile__()
+
 module GitLab
 
 using Compat
+using Compat.Dates
+using Compat.Base64
+using Nullables
 
 ##########
 # import #
 ##########
 
-import HttpCommon,
-       HttpServer,
+import HTTP,
        JSON,
-       MbedTLS,
-       Requests
+       MbedTLS
+
+########
+# init #
+########
+
+const ENTROPY = Ref{MbedTLS.Entropy}()
+const RNG     = Ref{MbedTLS.CtrDrbg}()
+
+function __init__()
+    ENTROPY[] = MbedTLS.Entropy()
+    RNG[]     = MbedTLS.CtrDrbg()
+    MbedTLS.seed!(RNG[], ENTROPY[])
+end
 
 #############
 # Utilities #
@@ -24,11 +40,11 @@ include("utils/requests.jl")
 
 # export -------
 
-export  # auth.jl
-        authenticate
+export # auth.jl
+       authenticate
 
-export  # requests.jl
-        rate_limit
+export # requests.jl
+       rate_limit
 
 ##################################
 # Owners (organizations + users) #
@@ -40,16 +56,15 @@ include("owners/owners.jl")
 
 # export -------
 
-export  # owners.jl
-        Owner,
-        owner,
-        orgs,
-        users,
-        #= TODO: No APIs in GitLab
-        followers,
-        following,
-        =#
-        repos
+export # owners.jl
+       Owner,
+       owner,
+       orgs,
+       users,
+       # NOTE: GitLab has no equivalent for these
+       # followers,
+       # following,
+       repos
 
 ################
 # Repositories #
@@ -65,43 +80,43 @@ include("repositories/statuses.jl")
 
 # export -------
 
-export  # repositories.jl
-        Repo,
-        repo,
-        create_fork,
-        forks,
-        contributors,
-        collaborators,
-        iscollaborator,
-        add_collaborator,
-        remove_collaborator,
-        stats
-    
-export  # contents.jl
-        Content,
-        file,
-        directory,
-        create_file,
-        update_file,
-        delete_file,
-        readme,
-        permalink
+export # repositories.jl
+       Repo,
+       repo,
+       create_fork,
+       forks,
+       contributors,
+       collaborators,
+       iscollaborator,
+       add_collaborator,
+       remove_collaborator,
+       stats
 
-export  # commits.jl
-        Commit,
-        commit,
-        commits
-    
-export  # branches.jl
-        Branch,
-        branch,
-        branches
+export # contents.jl
+       Content,
+       file,
+       directory,
+       create_file,
+       update_file,
+       delete_file,
+       readme,
+       permalink
 
-export  # statuses.jl
-        Status,
-        create_status,
-        statuses,
-        status
+export # commits.jl
+       Commit,
+       commit,
+       commits
+
+export # branches.jl
+       Branch,
+       branch,
+       branches
+
+export # statuses.jl
+       Status,
+       create_status,
+       statuses,
+       status
 
 ##########
 # Issues #
@@ -115,25 +130,25 @@ include("issues/comments.jl")
 
 # export -------
 
-export  # pull_requests.jl
-        PullRequest,
-        pull_requests,
-        pull_request
-    
-export  # issues.jl
-        Issue,
-        issue,
-        issues,
-        create_issue,
-        edit_issue
+export # pull_requests.jl
+       PullRequest,
+       pull_requests,
+       pull_request
 
-export  # comments.jl
-        Comment,
-        comment,
-        comments,
-        create_comment,
-        edit_comment,
-        delete_comment
+export # issues.jl
+       Issue,
+       issue,
+       issues,
+       create_issue,
+       edit_issue
+
+export # comments.jl
+       Comment,
+       comment,
+       comments,
+       create_comment,
+       edit_comment,
+       delete_comment
 
 ############
 # Activity #
@@ -146,21 +161,21 @@ include("activity/activity.jl")
 
 # export -------
 
-export  # activity.jl
-        star,
-        unstar,
-        stargazers,
-        starred,
-        watchers,
-        watched,
-        watch,
-        unwatch
-    
-export  # events/events.jl
-        WebhookEvent
+export # activity.jl
+       star,
+       unstar,
+       stargazers,
+       starred,
+       watchers,
+       watched,
+       watch,
+       unwatch
 
-export  # events/listeners.jl
-        EventListener,
-        CommentListener
+export # events/events.jl
+       WebhookEvent
+
+export # events/listeners.jl
+       EventListener,
+       CommentListener
 
 end # module GitLab

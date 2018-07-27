@@ -2,7 +2,7 @@
 # Branch Type #
 ###############
 
-type Branch <: GitLabType
+mutable struct Branch <: GitLabType
     name::Nullable{GitLabString}
     protected::Nullable{Bool}
     commit::Nullable{Commit}

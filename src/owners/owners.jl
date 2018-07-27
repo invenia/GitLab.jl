@@ -3,13 +3,13 @@
 ##############
 
 
-type Owner <: GitLabType
+mutable struct Owner <: GitLabType
     name::Nullable{GitLabString}
     username::Nullable{GitLabString}
     id::Nullable{Int}
     state::Nullable{GitLabString}
-    avatar_url::Nullable{HttpCommon.URI}
-    web_url::Nullable{HttpCommon.URI}
+    avatar_url::Nullable{HTTP.URI}
+    web_url::Nullable{HTTP.URI}
     ownership_type::Nullable{GitLabString} 
 
 #=
@@ -26,7 +26,7 @@ type Owner <: GitLabType
     followers::Nullable{Int}
     following::Nullable{Int}
     collaborators::Nullable{Int}
-    html_url::Nullable{HttpCommon.URI}
+    html_url::Nullable{HTTP.URI}
     updated_at::Nullable{Dates.DateTime}
     created_at::Nullable{Dates.DateTime}
     date::Nullable{Dates.DateTime}

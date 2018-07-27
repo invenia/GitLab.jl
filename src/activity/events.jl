@@ -2,7 +2,7 @@
 # WebhookEvent Type #
 #####################
 
-type WebhookEvent
+mutable struct WebhookEvent
     kind::GitLabString
     payload::Dict
     repository::Repo
@@ -41,15 +41,15 @@ end
 # Validation Functions #
 ########################
 
-has_event_header(request::HttpCommon.Request) = haskey(request.headers, "X-Gitlab-Event")
-event_header(request::HttpCommon.Request) = request.headers["X-Gitlab-Event"]
+has_event_header(request::HTTP.Request) = HTTP.hasheader(request, "X-Gitlab-Event")
+event_header(request::HTTP.Request) = HTTP.header(request, "X-Gitlab-Event")
 
-## has_sig_header(request::HttpCommon.Request) = haskey(request.headers, "X-Hub-Signature")
-## sig_header(request::HttpCommon.Request) = request.headers["X-Hub-Signature"]
-has_sig_header(request::HttpCommon.Request) = haskey(request.headers, "X-Gitlab-Token")
-sig_header(request::HttpCommon.Request) = request.headers["X-Gitlab-Token"]
+## has_sig_header(request::HTTP.Request) = HTTP.hasheader(request, "X-Hub-Signature")
+## sig_header(request::HTTP.Request) = HTTP.header(request, "X-Hub-Signature")
+has_sig_header(request::HTTP.Request) = HTTP.hasheader(request, "X-Gitlab-Token")
+sig_header(request::HTTP.Request) = HTTP.header(request, "X-Gitlab-Token")
 
-function has_valid_secret(request::HttpCommon.Request, secret)
+function has_valid_secret(request::HTTP.Request, secret)
     if has_sig_header(request)
         secret_sha = "sha1="*bytes2hex(MbedTLS.digest(MbedTLS.MD_SHA1, request.data, secret))
         @show sig_header(request), secret_sha
@@ -58,7 +58,7 @@ function has_valid_secret(request::HttpCommon.Request, secret)
     return false
 end
 
-function is_valid_event(request::HttpCommon.Request, events)
+function is_valid_event(request::HTTP.Request, events)
     return (has_event_header(request) && in(event_header(request), events))
 end
 
@@ -70,16 +70,16 @@ end
 # EventListener #
 #################
 
-immutable EventListener
+struct EventListener
     server::HttpServer.Server
     function EventListener(handle; auth::Authorization = AnonymousAuth(),
                            secret = nothing, events = nothing,
                            repos = nothing, forwards = nothing)
-        if !(isa(forwards, Void))
-            forwards = map(HttpCommon.URI, forwards)
+        if !(isa(forwards, Nothing))
+            forwards = map(HTTP.URI, forwards)
         end
 
-        if !(isa(repos, Void))
+        if !(isa(repos, Nothing))
             repos = map(name, repos)
         end
 
@@ -90,14 +90,14 @@ immutable EventListener
                                      repos = repos, forwards = forwards)
             catch err
                 println("SERVER ERROR: $err\n$(join(catch_stacktrace(), "\n"))")
-                return HttpCommon.Response(500)
+                return HTTP.Response(500)
             end
         end
 
         server.http.events["listen"] = port -> begin
             println("Listening for GitLab events sent to $port;")
-            println("Whitelisted events: $(isa(events, Void) ? "All" : events)")
-            println("Whitelisted repos: $(isa(repos, Void) ? "All" : repos)")
+            println("Whitelisted events: $(isa(events, Nothing) ? "All" : events)")
+            println("Whitelisted repos: $(isa(repos, Nothing) ? "All" : repos)")
         end
 
         return new(server)
@@ -115,24 +115,24 @@ function handle_event_request(request, handle;
     @show request.headers
     @show UTF8String(request.data)
     @show request.uri
-    if !(isa(secret, Void)) && !(has_valid_secret(request, secret))
+    if !(isa(secret, Nothing)) && !(has_valid_secret(request, secret))
         ## MDP TODO
         println("FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        ## MDP return HttpCommon.Response(400, "invalid signature")
+        ## MDP return HTTP.Response(400, "invalid signature")
     end
     =#
 
-    if !(isa(events, Void)) && !(is_valid_event(request, events))
-        return HttpCommon.Response(400, "invalid event")
+    if !(isa(events, Nothing)) && !(is_valid_event(request, events))
+        return HTTP.Response(400, "invalid event")
     end
 
     event = event_from_payload!(event_header(request), Requests.json(request))
 
-    if !(isa(repos, Void)) && !(from_valid_repo(event, repos))
-        return HttpCommon.Response(400, "invalid repo")
+    if !(isa(repos, Nothing)) && !(from_valid_repo(event, repos))
+        return HTTP.Response(400, "invalid repo")
     end
 
-    if !(isa(forwards, Void))
+    if !(isa(forwards, Nothing))
         for address in forwards
             Requests.post(address, request)
         end
@@ -163,7 +163,7 @@ const COMMENT_EVENTS = ["Note Hook",
                         "issues",
                         "issue_comment"]
 
-immutable CommentListener
+struct CommentListener
     listener::EventListener
     function CommentListener(handle, trigger::Regex;
                              auth::Authorization = AnonymousAuth(),
@@ -193,14 +193,14 @@ function handle_comment(handle, event::WebhookEvent, auth::Authorization,
     elseif haskey(payload, "object_attributes")
         body_container = payload["object_attributes"]
     else
-        return HttpCommon.Response(204, "payload does not contain comment")
+        return HTTP.Response(204, "payload does not contain comment")
     end
 
     if check_collab
         repo = event.repository
         user = payload["user"]["username"]
         if !(iscollaborator(repo, user; params = Dict("private_token" => auth.token)))
-            return HttpCommon.Response(204, "commenter is not collaborator")
+            return HTTP.Response(204, "commenter is not collaborator")
         end
     end
 
@@ -208,7 +208,7 @@ function handle_comment(handle, event::WebhookEvent, auth::Authorization,
     trigger_match = match(trigger, body_container["note"])
 
     if trigger_match == nothing
-        return HttpCommon.Response(204, "trigger match not found")
+        return HTTP.Response(204, "trigger match not found")
     end
 
     return handle(event, trigger_match)

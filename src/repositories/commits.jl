@@ -2,7 +2,7 @@
 # Commit Type #
 ###############
 
-type Commit <: GitLabType
+mutable struct Commit <: GitLabType
     id::Nullable{GitLabString}
     author_email::Nullable{GitLabString}
     title::Nullable{GitLabString}
