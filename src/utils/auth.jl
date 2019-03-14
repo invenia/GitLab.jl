@@ -2,13 +2,13 @@
 # Authorization Types #
 #######################
 
-abstract Authorization
+abstract type Authorization end
 
-immutable OAuth2 <: Authorization
+struct OAuth2 <: Authorization
     token::String
 end
 
-immutable AnonymousAuth <: Authorization end
+struct AnonymousAuth <: Authorization end
 
 ###############
 # API Methods #
