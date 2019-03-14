@@ -3,50 +3,50 @@
 ####################
 
 type PullRequest <: GitLabType
-    id::Nullable{Int}
-    iid::Nullable{Int}
-    project_id::Nullable{Int}
-    title::Nullable{GitLabString}
-    description::Nullable{GitLabString}
-    state::Nullable{GitLabString}
-    created_at::Nullable{Dates.DateTime}
-    updated_at::Nullable{Dates.DateTime}
-    target_branch::Nullable{GitLabString}
-    source_branch::Nullable{GitLabString}
-    upvotes::Nullable{Int}
-    downvotes::Nullable{Int}
-    author::Nullable{Owner}
-    assignee::Nullable{Owner}
-    source_project_id::Nullable{Int}
-    target_project_id::Nullable{Int}
-    labels::Nullable{Vector{GitLabString}}
-    work_in_progress::Nullable{Bool}
-    milestone::Nullable{GitLabString}
-    merge_when_build_succeeds::Nullable{Bool}
-    merge_status::Nullable{GitLabString}
-    subscribed::Nullable{Bool}
-    user_notes_count::Nullable{Int}
+    id::Union{Int, Nothing}
+    iid::Union{Int, Nothing}
+    project_id::Union{Int, Nothing}
+    title::Union{GitLabString, Nothing}
+    description::Union{GitLabString, Nothing}
+    state::Union{GitLabString, Nothing}
+    created_at::Union{Dates.DateTime, Nothing}
+    updated_at::Union{Dates.DateTime, Nothing}
+    target_branch::Union{GitLabString, Nothing}
+    source_branch::Union{GitLabString, Nothing}
+    upvotes::Union{Int, Nothing}
+    downvotes::Union{Int, Nothing}
+    author::Union{Owner, Nothing}
+    assignee::Union{Owner, Nothing}
+    source_project_id::Union{Int, Nothing}
+    target_project_id::Union{Int, Nothing}
+    labels::Union{Vector{GitLabString}, Nothing}
+    work_in_progress::Union{Bool, Nothing}
+    milestone::Union{GitLabString, Nothing}
+    merge_when_build_succeeds::Union{Bool, Nothing}
+    merge_status::Union{GitLabString, Nothing}
+    subscribed::Union{Bool, Nothing}
+    user_notes_count::Union{Int, Nothing}
 
 
 #=
-    base::Nullable{Branch}
-    head::Nullable{Branch}
-    number::Nullable{Int}
-    comments::Nullable{Int}
-    commits::Nullable{Int}
-    additions::Nullable{Int}
-    deletions::Nullable{Int}
-    changed_files::Nullable{Int}
-    merge_commit_sha::Nullable{GitLabString}
-    closed_at::Nullable{Dates.DateTime}
-    merged_at::Nullable{Dates.DateTime}
-    url::Nullable{HttpCommon.URI}
-    html_url::Nullable{HttpCommon.URI}
-    merged_by::Nullable{Owner}
-    _links::Nullable{Dict}
-    mergeable::Nullable{Bool}
-    merged::Nullable{Bool}
-    locked::Nullable{Bool}
+    base::Union{Branch, Nothing}
+    head::Union{Branch, Nothing}
+    number::Union{Int, Nothing}
+    comments::Union{Int, Nothing}
+    commits::Union{Int, Nothing}
+    additions::Union{Int, Nothing}
+    deletions::Union{Int, Nothing}
+    changed_files::Union{Int, Nothing}
+    merge_commit_sha::Union{GitLabString, Nothing}
+    closed_at::Union{Dates.DateTime, Nothing}
+    merged_at::Union{Dates.DateTime, Nothing}
+    url::Union{HttpCommon.URI, Nothing}
+    html_url::Union{HttpCommon.URI, Nothing}
+    merged_by::Union{Owner, Nothing}
+    _links::Union{Dict, Nothing}
+    mergeable::Union{Bool, Nothing}
+    merged::Union{Bool, Nothing}
+    locked::Union{Bool, Nothing}
 =#
 end
 

@@ -3,28 +3,28 @@
 ###############
 
 type Status <: GitLabType
-    id::Nullable{Int}
-    total_count::Nullable{Int}
-    state::Nullable{GitLabString}
-    description::Nullable{GitLabString}
-    context::Nullable{GitLabString}
-    sha::Nullable{GitLabString}
-    url::Nullable{HttpCommon.URI}
-    target_url::Nullable{HttpCommon.URI}
-    created_at::Nullable{Dates.DateTime}
-    updated_at::Nullable{Dates.DateTime}
-    creator::Nullable{Owner}
-    repository::Nullable{Repo}
-    statuses::Nullable{Vector{Status}}
+    id::Union{Int, Nothing}
+    total_count::Union{Int, Nothing}
+    state::Union{GitLabString, Nothing}
+    description::Union{GitLabString, Nothing}
+    context::Union{GitLabString, Nothing}
+    sha::Union{GitLabString, Nothing}
+    url::Union{HttpCommon.URI, Nothing}
+    target_url::Union{HttpCommon.URI, Nothing}
+    created_at::Union{Dates.DateTime, Nothing}
+    updated_at::Union{Dates.DateTime, Nothing}
+    creator::Union{Owner, Nothing}
+    repository::Union{Repo, Nothing}
+    statuses::Union{Vector{Status}, Nothing}
 
     ## For commit status
-    status::Nullable{GitLabString}
-    name::Nullable{GitLabString}
-    author::Nullable{Owner}
-    ref::Nullable{GitLabString}
-    started_at::Nullable{Dates.DateTime}
-    finished_at::Nullable{Dates.DateTime}
-    allow_failure::Nullable{Bool}
+    status::Union{GitLabString, Nothing}
+    name::Union{GitLabString, Nothing}
+    author::Union{Owner, Nothing}
+    ref::Union{GitLabString, Nothing}
+    started_at::Union{Dates.DateTime, Nothing}
+    finished_at::Union{Dates.DateTime, Nothing}
+    allow_failure::Union{Bool, Nothing}
 end
 
 Status(data::Dict) = json2gitlab(Status, data)

@@ -3,38 +3,38 @@
 ################
 
 type Comment <: GitLabType
-    noteable_type::Nullable{GitLabString}
-    ## created_at::Nullable{Dates.DateTime}
-    created_at::Nullable{GitLabString}
-    line_code::Nullable{Int64}
-    note::Nullable{GitLabString}
-    author::Nullable{Owner}
-    author_id::Nullable{Int64}
-    updated_by_id::Nullable{GitLabString}
-    noteable_id::Nullable{Int64}
-    commit_id::Nullable{GitLabString}
-    system::Nullable{Bool}
-    url::Nullable{HttpCommon.URI}
-    is_award::Nullable{Bool}
-    st_diff::Nullable{GitLabString}
-    id::Nullable{Int64}
-    ## updated_at::Nullable{Dates.DateTime}
-    updated_at::Nullable{GitLabString}
-    project_id::Nullable{Int64}
-    attachment::Nullable{GitLabString}
-    ## type::Nullable{GitLabString}
-    path::Nullable{GitLabString}
-    line::Nullable{GitLabString}
-    line_type::Nullable{GitLabString}
+    noteable_type::Union{GitLabString, Nothing}
+    ## created_at::Union{Dates.DateTime, Nothing}
+    created_at::Union{GitLabString, Nothing}
+    line_code::Union{Int64, Nothing}
+    note::Union{GitLabString, Nothing}
+    author::Union{Owner, Nothing}
+    author_id::Union{Int64, Nothing}
+    updated_by_id::Union{GitLabString, Nothing}
+    noteable_id::Union{Int64, Nothing}
+    commit_id::Union{GitLabString, Nothing}
+    system::Union{Bool, Nothing}
+    url::Union{HttpCommon.URI, Nothing}
+    is_award::Union{Bool, Nothing}
+    st_diff::Union{GitLabString, Nothing}
+    id::Union{Int64, Nothing}
+    ## updated_at::Union{Dates.DateTime, Nothing}
+    updated_at::Union{GitLabString, Nothing}
+    project_id::Union{Int64, Nothing}
+    attachment::Union{GitLabString, Nothing}
+    ## type::Union{GitLabString, Nothing}
+    path::Union{GitLabString, Nothing}
+    line::Union{GitLabString, Nothing}
+    line_type::Union{GitLabString, Nothing}
 
 #=
-    original_commit_id::Nullable{GitLabString}
-    original_position::Nullable{Int}
-    position::Nullable{Int}
-    html_url::Nullable{HttpCommon.URI}
-    issue_url::Nullable{HttpCommon.URI}
-    pull_request_url::Nullable{HttpCommon.URI}
-    user::Nullable{Owner}
+    original_commit_id::Union{GitLabString, Nothing}
+    original_position::Union{Int, Nothing}
+    position::Union{Int, Nothing}
+    html_url::Union{HttpCommon.URI, Nothing}
+    issue_url::Union{HttpCommon.URI, Nothing}
+    pull_request_url::Union{HttpCommon.URI, Nothing}
+    user::Union{Owner, Nothing}
 =#
 
 #=

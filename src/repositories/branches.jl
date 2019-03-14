@@ -3,17 +3,17 @@
 ###############
 
 type Branch <: GitLabType
-    name::Nullable{GitLabString}
-    protected::Nullable{Bool}
-    commit::Nullable{Commit}
+    name::Union{GitLabString, Nothing}
+    protected::Union{Bool, Nothing}
+    commit::Union{Commit, Nothing}
 #=
-    label::Nullable{GitLabString}
-    ref::Nullable{GitLabString}
-    sha::Nullable{GitLabString}
-    user::Nullable{Owner}
-    repo::Nullable{Repo}
-    _links::Nullable{Dict}
-    protection::Nullable{Dict}
+    label::Union{GitLabString, Nothing}
+    ref::Union{GitLabString, Nothing}
+    sha::Union{GitLabString, Nothing}
+    user::Union{Owner, Nothing}
+    repo::Union{Repo, Nothing}
+    _links::Union{Dict, Nothing}
+    protection::Union{Dict, Nothing}
 =#
 end
 

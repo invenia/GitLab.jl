@@ -3,44 +3,44 @@
 #############
 
 type Repo <: GitLabType
-    name::Nullable{GitLabString}
-    visibility_level::Nullable{Int}
-    homepage::Nullable{HttpCommon.URI}
-    git_http_url::Nullable{HttpCommon.URI}
-    description::Nullable{GitLabString}
-    project_id::Nullable{Int}
+    name::Union{GitLabString, Nothing}
+    visibility_level::Union{Int, Nothing}
+    homepage::Union{HttpCommon.URI, Nothing}
+    git_http_url::Union{HttpCommon.URI, Nothing}
+    description::Union{GitLabString, Nothing}
+    project_id::Union{Int, Nothing}
 
-    id::Nullable{Int}
-    default_branch::Nullable{GitLabString}
-    tag_list::Nullable{Vector{GitLabString}}
-    public::Nullable{Bool}
-    archived::Nullable{Bool}
-    ## TODO FIX ssh_url_to_repo::Nullable{HttpCommon.URI}
-    http_url_to_repo::Nullable{HttpCommon.URI}
-    web_url::Nullable{HttpCommon.URI}
-    owner::Nullable{Owner}
-    name_with_namespace::Nullable{GitLabString}
-    path::Nullable{GitLabString}
-    path_with_namespace::Nullable{GitLabString}
-    issues_enabled::Nullable{Bool}
-    merge_requests_enabled::Nullable{Bool}
-    wiki_enabled::Nullable{Bool}
-    builds_enabled::Nullable{Bool}
-    snippets_enabled::Nullable{Bool}
-    container_registry_enabled::Nullable{Bool}
-    created_at::Nullable{Dates.DateTime}
-    last_activity_at::Nullable{Dates.DateTime}
-    shared_runners_enabled::Nullable{Bool}
-    creator_id::Nullable{Int}
-    ## TODO FIX namespace::Nullable{Namespace}
+    id::Union{Int, Nothing}
+    default_branch::Union{GitLabString, Nothing}
+    tag_list::Union{Vector{GitLabString}, Nothing}
+    public::Union{Bool, Nothing}
+    archived::Union{Bool, Nothing}
+    ## TODO FIX ssh_url_to_repo::Union{HttpCommon.URI, Nothing}
+    http_url_to_repo::Union{HttpCommon.URI, Nothing}
+    web_url::Union{HttpCommon.URI, Nothing}
+    owner::Union{Owner, Nothing}
+    name_with_namespace::Union{GitLabString, Nothing}
+    path::Union{GitLabString, Nothing}
+    path_with_namespace::Union{GitLabString, Nothing}
+    issues_enabled::Union{Bool, Nothing}
+    merge_requests_enabled::Union{Bool, Nothing}
+    wiki_enabled::Union{Bool, Nothing}
+    builds_enabled::Union{Bool, Nothing}
+    snippets_enabled::Union{Bool, Nothing}
+    container_registry_enabled::Union{Bool, Nothing}
+    created_at::Union{Dates.DateTime, Nothing}
+    last_activity_at::Union{Dates.DateTime, Nothing}
+    shared_runners_enabled::Union{Bool, Nothing}
+    creator_id::Union{Int, Nothing}
+    ## TODO FIX namespace::Union{Namespace, Nothing}
     ## \"namespace\":{\"id\":2,\"name\":\"mdpradeep\",\"path\":\"mdpradeep\",\"owner_id\":2,\"created_at\":\"2016-06-17T07:09:56.494Z\",\"updated_at\":\"2016-06-17T07:09:56.494Z\",\"description\":\"\",\"avatar\":null,\"share_with_group_lock\":false,\"visibility_level\":20}
-    avatar_url::Nullable{HttpCommon.URI}
-    star_count::Nullable{Int}
-    forks_count::Nullable{Int}
-    open_issues_count::Nullable{Int}
-    runners_token::Nullable{GitLabString}
-    public_builds::Nullable{Bool}
-    ## TODO permissions::Nullable{Permissions}
+    avatar_url::Union{HttpCommon.URI, Nothing}
+    star_count::Union{Int, Nothing}
+    forks_count::Union{Int, Nothing}
+    open_issues_count::Union{Int, Nothing}
+    runners_token::Union{GitLabString, Nothing}
+    public_builds::Union{Bool, Nothing}
+    ## TODO permissions::Union{Permissions, Nothing}
     ## \"permissions\":{\"project_access\":{\"access_level\":40,\"notification_level\":3},\"group_access\":null}
 end
 

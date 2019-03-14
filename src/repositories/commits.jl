@@ -3,20 +3,20 @@
 ###############
 
 type Commit <: GitLabType
-    id::Nullable{GitLabString}
-    author_email::Nullable{GitLabString}
-    title::Nullable{GitLabString}
-    short_id::Nullable{GitLabString}
-    message::Nullable{GitLabString}
-    committer_name::Nullable{GitLabString}
-    ## parents::Nullable{Vector{Commit}}
-    parent_ids::Nullable{Vector{Any}}
-    authored_date::Nullable{GitLabString}
-    committer_email::Nullable{GitLabString}
-    ## author_name::Nullable{Owner}
-    author_name::Nullable{GitLabString}
-    committed_date::Nullable{GitLabString}
-    created_at::Nullable{GitLabString}
+    id::Union{GitLabString, Nothing}
+    author_email::Union{GitLabString, Nothing}
+    title::Union{GitLabString, Nothing}
+    short_id::Union{GitLabString, Nothing}
+    message::Union{GitLabString, Nothing}
+    committer_name::Union{GitLabString, Nothing}
+    ## parents::Union{Vector{Commit}, Nothing}
+    parent_ids::Union{Vector{Any}, Nothing}
+    authored_date::Union{GitLabString, Nothing}
+    committer_email::Union{GitLabString, Nothing}
+    ## author_name::Union{Owner, Nothing}
+    author_name::Union{GitLabString, Nothing}
+    committed_date::Union{GitLabString, Nothing}
+    created_at::Union{GitLabString, Nothing}
 end
 
 Commit(data::Dict) = json2gitlab(Commit, data)

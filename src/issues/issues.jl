@@ -3,32 +3,32 @@
 ##############
 
 type Issue <: GitLabType
-    id::Nullable{Int}
-    iid::Nullable{Int}
-    project_id::Nullable{Int}
-    title::Nullable{GitLabString}
-    description::Nullable{GitLabString}
-    state::Nullable{GitLabString}
-    created_at::Nullable{Dates.DateTime}
-    updated_at::Nullable{Dates.DateTime}
-    ## labels::Nullable{Vector{Dict}}
-    labels::Nullable{Vector{GitLabString}}
-    milestone::Nullable{GitLabString}
-    assignee::Nullable{Owner}
-    author::Nullable{Owner}
-    subscribed::Nullable{Bool}
-    user_notes_count::Nullable{Int}
+    id::Union{Int, Nothing}
+    iid::Union{Int, Nothing}
+    project_id::Union{Int, Nothing}
+    title::Union{GitLabString, Nothing}
+    description::Union{GitLabString, Nothing}
+    state::Union{GitLabString, Nothing}
+    created_at::Union{Dates.DateTime, Nothing}
+    updated_at::Union{Dates.DateTime, Nothing}
+    ## labels::Union{Vector{Dict}, Nothing}
+    labels::Union{Vector{GitLabString}, Nothing}
+    milestone::Union{GitLabString, Nothing}
+    assignee::Union{Owner, Nothing}
+    author::Union{Owner, Nothing}
+    subscribed::Union{Bool, Nothing}
+    user_notes_count::Union{Int, Nothing}
 
 #=
-    closed_by::Nullable{Owner}
-    closed_at::Nullable{Dates.DateTime}
-    pull_request::Nullable{PullRequest}
-    url::Nullable{HttpCommon.URI}
-    html_url::Nullable{HttpCommon.URI}
-    labels_url::Nullable{HttpCommon.URI}
-    comments_url::Nullable{HttpCommon.URI}
-    events_url::Nullable{HttpCommon.URI}
-    locked::Nullable{Bool}
+    closed_by::Union{Owner, Nothing}
+    closed_at::Union{Dates.DateTime, Nothing}
+    pull_request::Union{PullRequest, Nothing}
+    url::Union{HttpCommon.URI, Nothing}
+    html_url::Union{HttpCommon.URI, Nothing}
+    labels_url::Union{HttpCommon.URI, Nothing}
+    comments_url::Union{HttpCommon.URI, Nothing}
+    events_url::Union{HttpCommon.URI, Nothing}
+    locked::Union{Bool, Nothing}
 =#
 end
 

@@ -5,24 +5,24 @@
 
 
 type Content <: GitLabType
-    file_name::Nullable{GitLabString}
-    file_path::Nullable{GitLabString}
-    size::Nullable{Int}
-    encoding::Nullable{GitLabString}
-    content::Nullable{GitLabString}
-    ref::Nullable{GitLabString}
-    blob_id::Nullable{GitLabString}
-    commit_id::Nullable{GitLabString}
-    last_commit_id::Nullable{GitLabString}
+    file_name::Union{GitLabString, Nothing}
+    file_path::Union{GitLabString, Nothing}
+    size::Union{Int, Nothing}
+    encoding::Union{GitLabString, Nothing}
+    content::Union{GitLabString, Nothing}
+    ref::Union{GitLabString, Nothing}
+    blob_id::Union{GitLabString, Nothing}
+    commit_id::Union{GitLabString, Nothing}
+    last_commit_id::Union{GitLabString, Nothing}
 
 #=
-    typ::Nullable{GitLabString}
-    name::Nullable{GitLabString}
-    target::Nullable{GitLabString}
-    url::Nullable{HttpCommon.URI}
-    git_url::Nullable{HttpCommon.URI}
-    html_url::Nullable{HttpCommon.URI}
-    download_url::Nullable{HttpCommon.URI}
+    typ::Union{GitLabString, Nothing}
+    name::Union{GitLabString, Nothing}
+    target::Union{GitLabString, Nothing}
+    url::Union{HttpCommon.URI, Nothing}
+    git_url::Union{HttpCommon.URI, Nothing}
+    html_url::Union{HttpCommon.URI, Nothing}
+    download_url::Union{HttpCommon.URI, Nothing}
 =#
 end
 

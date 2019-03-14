@@ -4,34 +4,34 @@
 
 
 type Owner <: GitLabType
-    name::Nullable{GitLabString}
-    username::Nullable{GitLabString}
-    id::Nullable{Int}
-    state::Nullable{GitLabString}
-    avatar_url::Nullable{HttpCommon.URI}
-    web_url::Nullable{HttpCommon.URI}
-    ownership_type::Nullable{GitLabString}
+    name::Union{GitLabString, Nothing}
+    username::Union{GitLabString, Nothing}
+    id::Union{Int, Nothing}
+    state::Union{GitLabString, Nothing}
+    avatar_url::Union{HttpCommon.URI, Nothing}
+    web_url::Union{HttpCommon.URI, Nothing}
+    ownership_type::Union{GitLabString, Nothing}
 
 #=
-    email::Nullable{GitLabString}
-    bio::Nullable{GitLabString}
-    company::Nullable{GitLabString}
-    location::Nullable{GitLabString}
-    gravatar_id::Nullable{GitLabString}
-    public_repos::Nullable{Int}
-    owned_private_repos::Nullable{Int}
-    total_private_repos::Nullable{Int}
-    public_gists::Nullable{Int}
-    private_gists::Nullable{Int}
-    followers::Nullable{Int}
-    following::Nullable{Int}
-    collaborators::Nullable{Int}
-    html_url::Nullable{HttpCommon.URI}
-    updated_at::Nullable{Dates.DateTime}
-    created_at::Nullable{Dates.DateTime}
-    date::Nullable{Dates.DateTime}
-    hireable::Nullable{Bool}
-    site_admin::Nullable{Bool}
+    email::Union{GitLabString, Nothing}
+    bio::Union{GitLabString, Nothing}
+    company::Union{GitLabString, Nothing}
+    location::Union{GitLabString, Nothing}
+    gravatar_id::Union{GitLabString, Nothing}
+    public_repos::Union{Int, Nothing}
+    owned_private_repos::Union{Int, Nothing}
+    total_private_repos::Union{Int, Nothing}
+    public_gists::Union{Int, Nothing}
+    private_gists::Union{Int, Nothing}
+    followers::Union{Int, Nothing}
+    following::Union{Int, Nothing}
+    collaborators::Union{Int, Nothing}
+    html_url::Union{HttpCommon.URI, Nothing}
+    updated_at::Union{Dates.DateTime, Nothing}
+    created_at::Union{Dates.DateTime, Nothing}
+    date::Union{Dates.DateTime, Nothing}
+    hireable::Union{Bool, Nothing}
+    site_admin::Union{Bool, Nothing}
 =#
 end
 
