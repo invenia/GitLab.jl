@@ -69,7 +69,7 @@ end
 function permalink(content::Content, commit)
     url = string(content.html_url)
     prefix = content.typ == "file" ? "blob" : "tree"
-    rgx = Regex(string("\/", prefix, "\/.*?\/"))
+    rgx = Regex(string("\\/", prefix, "\\/.*?\\/"))
     replacement = string("/", prefix, "/", name(commit), "/")
     return HTTP.URI(replace(url, rgx, replacement))
 end
@@ -80,8 +80,8 @@ end
 
 ## content_uri(repo, path) = "/api/v3/projects/$(repo.id))/contents/$(name(path)"
 ## content_uri(repo, path) = "/api/v3/projects/$(repo.id)/files"
-content_uri(repo, path, ref) = "/api/v3/projects/$(repo.id))/repository/files?file_path=$(name(path))&ref=$(name(ref)"
-content_uri(repo, path) = "/api/v3/projects/$(repo.id))/repository/files?file_path=$(name(path)&ref=master"
+content_uri(repo, path, ref) = "/api/v3/projects/$(repo.id)/repository/files?file_path=$(name(path))&ref=$(name(ref))"
+content_uri(repo, path) = "/api/v3/projects/$(repo.id))/repository/files?file_path=$(name(path))&ref=master"
 
 function build_content_response(json::Dict)
     results = Dict()

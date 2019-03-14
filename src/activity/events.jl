@@ -41,15 +41,15 @@ end
 # Validation Functions #
 ########################
 
-has_event_header(request::HttpCommon.Request) = haskey(request.headers, "X-Gitlab-Event")
-event_header(request::HttpCommon.Request) = request.headers["X-Gitlab-Event"]
+has_event_header(request::HTTP.Request) = haskey(request.headers, "X-Gitlab-Event")
+event_header(request::HTTP.Request) = request.headers["X-Gitlab-Event"]
 
-## has_sig_header(request::HttpCommon.Request) = haskey(request.headers, "X-Hub-Signature")
-## sig_header(request::HttpCommon.Request) = request.headers["X-Hub-Signature"]
-has_sig_header(request::HttpCommon.Request) = haskey(request.headers, "X-Gitlab-Token")
-sig_header(request::HttpCommon.Request) = request.headers["X-Gitlab-Token"]
+## has_sig_header(request::HTTP.Request) = haskey(request.headers, "X-Hub-Signature")
+## sig_header(request::HTTP.Request) = request.headers["X-Hub-Signature"]
+has_sig_header(request::HTTP.Request) = haskey(request.headers, "X-Gitlab-Token")
+sig_header(request::HTTP.Request) = request.headers["X-Gitlab-Token"]
 
-function has_valid_secret(request::HttpCommon.Request, secret)
+function has_valid_secret(request::HTTP.Request, secret)
     if has_sig_header(request)
         secret_sha = "sha1="*bytes2hex(MbedTLS.digest(MbedTLS.MD_SHA1, request.data, secret))
         @show sig_header(request), secret_sha
@@ -58,7 +58,7 @@ function has_valid_secret(request::HttpCommon.Request, secret)
     return false
 end
 
-function is_valid_event(request::HttpCommon.Request, events)
+function is_valid_event(request::HTTP.Request, events)
     return (has_event_header(request) && in(event_header(request), events))
 end
 
@@ -71,7 +71,7 @@ end
 #################
 
 struct EventListener
-    server::HttpServer.Server
+    server::HTTP.Servers.Server  # TODO: This probably needs to be overhauled (see GitHub.jl).
     function EventListener(handle; auth::Authorization = AnonymousAuth(),
                            secret = nothing, events = nothing,
                            repos = nothing, forwards = nothing)

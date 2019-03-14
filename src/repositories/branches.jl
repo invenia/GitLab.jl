@@ -35,6 +35,6 @@ end
 
 function branch(repo, branch; options...)
     ## result = gh_get_json("/repos/$(name(repo))/branches/$(name(branch))"; options...)
-    result = gh_get_json("/api/v3/projects/$(repo.id))/repository/branches/$(name(branch)"; options...)
+    result = gh_get_json("/api/v3/projects/$(repo.id)/repository/branches/$(name(branch))"; options...)
     return Branch(result)
 end

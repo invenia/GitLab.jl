@@ -29,7 +29,6 @@ function gitlab_request(request_method, endpoint;
 end
 
 gh_get(endpoint = ""; options...) = gitlab_request(Requests.get, endpoint; options...)
-gh_get(endpoint = ""; options...) = gitlab_request(Requests.get, endpoint; options...)
 gh_post(endpoint = ""; options...) = gitlab_request(Requests.post, endpoint; options...)
 gh_put(endpoint = ""; options...) = gitlab_request(Requests.put, endpoint; options...)
 gh_delete(endpoint = ""; options...) = gitlab_request(Requests.delete, endpoint; options...)
@@ -111,12 +110,10 @@ end
 function handle_response_error(r::HTTP.Response)
     if r.status >= 400
         message, docs_url, errors = "", "", ""
-        try
-            data = Requests.json(r)
-            message = get(data, "message", "")
-            docs_url = get(data, "documentation_url", "")
-            errors = get(data, "errors", "")
-        end
+        data = Requests.json(r)
+        message = get(data, "message", "")
+        docs_url = get(data, "documentation_url", "")
+        errors = get(data, "errors", "")
         error("Error found in GitLab response:\n",
               "\tStatus Code: $(r.status)\n",
               "\tMessage: $message\n",
