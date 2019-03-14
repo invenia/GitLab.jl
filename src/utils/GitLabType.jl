@@ -18,15 +18,15 @@
 
 abstract GitLabType
 
-function @compat(Base.:(==))(a::GitLabType, b::GitLabType)
+function Base.:(==)(a::GitLabType, b::GitLabType)
     if typeof(a) != typeof(b)
         return false
     end
 
     for field in fieldnames(a)
         aval, bval = getfield(a, field), getfield(b, field)
-        if isnull(aval) == isnull(bval)
-            if !(isnull(aval)) && get(aval) != get(bval)
+        if (aval === nothing) == (bval === nothing)
+            if aval !== nothing && aval != bval
                 return false
             end
         else

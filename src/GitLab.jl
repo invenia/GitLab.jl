@@ -1,7 +1,5 @@
 module GitLab
 
-using Compat
-
 ##########
 # import #
 ##########
