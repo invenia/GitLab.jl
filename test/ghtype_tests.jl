@@ -1,11 +1,12 @@
-import JSON
-using GitLab, GitLab.name, GitLab.String, GitLab.Branch
-using Base.Test
+using Dates
+using JSON
+using Test
+using GitLab, GitLab.name, GitLab.Branch
 
 # This file tests various GitLabType constructors. To test for proper Nullable
 # handling, most fields have been removed from the JSON samples used below.
 # Sample fields were selected in order to cover the full range of type behavior,
-# e.g. if the GitLabType has a few Nullable{Dates.DateTime} fields, at least one
+# e.g. if the GitLabType has a few Nullable{DateTime} fields, at least one
 # of those fields should be present in the JSON sample.
 
 function test_show(g::GitLab.GitLabType)
@@ -40,13 +41,13 @@ owner_json = JSON.parse(
 )
 
 owner_result = Owner(
-    Nullable{String}(String(owner_json["name"])),
-    Nullable{String}(String(owner_json["username"])),
-    Nullable{Int}(Int(owner_json["id"])),
-    Nullable{String}(String(owner_json["state"])),
-    Nullable{HttpCommon.URI}(HttpCommon.URI("")),
-    Nullable{HttpCommon.URI}(HttpCommon.URI(owner_json["web_url"])),
-    Nullable{String}(String(owner_json["ownership_type"]))
+    owner_json["name"],
+    owner_json["username"],
+    owner_json["id"],
+    owner_json["state"],
+    HttpCommon.URI(""),
+    HttpCommon.URI(owner_json["web_url"]),
+    owner_json["ownership_type"]
 )
 
 @test Owner(owner_json) == owner_result
@@ -76,39 +77,39 @@ repo_json = JSON.parse(
 )
 
 repo_result = Repo(
-    Nullable{String}(String(repo_json["name"])),
-    Nullable{Int}(),
-    Nullable{HttpCommon.URI}(),
-    Nullable{HttpCommon.URI}(),
-    Nullable{String}(),
-    Nullable{Int}(Int(repo_json["project_id"])),
-    Nullable{Int}(),
-    Nullable{String}(),
-    Nullable{Vector{String}}(),
-    Nullable{Bool}(Bool(repo_json["public"])),
-    Nullable{Bool}(),
-    Nullable{HttpCommon.URI}(),
-    Nullable{HttpCommon.URI}(HttpCommon.URI(repo_json["web_url"])),
-    Nullable{Owner}(Owner(repo_json["owner"])),
-    Nullable{String}(),
-    Nullable{String}(),
-    Nullable{String}(),
-    Nullable{Bool}(),
-    Nullable{Bool}(),
-    Nullable{Bool}(),
-    Nullable{Bool}(),
-    Nullable{Bool}(),
-    Nullable{Bool}(),
-    Nullable{Dates.DateTime}(),
-    Nullable{Dates.DateTime}(Dates.DateTime(repo_json["last_activity_at"])),
-    Nullable{Bool}(),
-    Nullable{Int}(),
-    Nullable{HttpCommon.URI}(),
-    Nullable{Int}(),
-    Nullable{Int}(),
-    Nullable{Int}(),
-    Nullable{String}(),
-    Nullable{Bool}()
+    repo_json["name"],
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    repo_json["project_id"],
+    nothing,
+    nothing,
+    nothing,
+    repo_json["public"],
+    nothing,
+    nothing,
+    HttpCommon.URI(repo_json["web_url"]),
+    Owner(repo_json["owner"]),
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    DateTime(repo_json["last_activity_at"]),
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing
 )
 
 @test Repo(repo_json) == repo_result
@@ -136,18 +137,18 @@ commit_json = JSON.parse(
 )
 
 commit_result = Commit(
-    Nullable{String}(String(commit_json["id"])),
-    Nullable{String}(String(commit_json["author_email"])),
-    Nullable{String}(String(commit_json["title"])),
-    Nullable{String}(String(commit_json["short_id"])),
-    Nullable{String}(String(commit_json["message"])),
-    Nullable{String}(),
-    Nullable{Vector{Any}}(),
-    Nullable{String}(),
-    Nullable{String}(),
-    Nullable{String}(String(commit_json["author_name"])),
-    Nullable{String}(),
-    Nullable{String}(String(commit_json["created_at"]))
+    commit_json["id"],
+    commit_json["author_email"],
+    commit_json["title"],
+    commit_json["short_id"],
+    commit_json["message"],
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    commit_json["author_name"],
+    nothing,
+    commit_json["created_at"]
 )
 
 @test Commit(commit_json) == commit_result
@@ -183,9 +184,9 @@ branch_json = JSON.parse(
 )
 
 branch_result = Branch(
-    Nullable{String}(String(branch_json["name"])),
-    Nullable{Bool}(Bool(branch_json["protected"])),
-    Nullable{Commit}(Commit(branch_json["commit"]))
+    branch_json["name"],
+    branch_json["protected"],
+    Commit(branch_json["commit"])
 )
 
 @test Branch(branch_json) == branch_result
@@ -216,26 +217,26 @@ comment_json = JSON.parse(
 )
 
 comment_result = Comment(
-    Nullable{String}(),
-    Nullable{String}(String(comment_json["created_at"])),
-    Nullable{Int64}(),
-    Nullable{String}(String(comment_json["note"])),
-    Nullable{Owner}(Owner(comment_json["author"])),
-    Nullable{Int64}(),
-    Nullable{String}(),
-    Nullable{Int64}(),
-    Nullable{String}(),
-    Nullable{Bool}(),
-    Nullable{HttpCommon.URI}(),
-    Nullable{Bool}(),
-    Nullable{String}(),
-    Nullable{Int64}(),
-    Nullable{String}(),
-    Nullable{Int64}(),
-    Nullable{String}(),
-    Nullable{String}(),
-    Nullable{String}(),
-    Nullable{String}()
+    nothing,
+    comment_json["created_at"],
+    nothing,
+    comment_json["note"],
+    Owner(comment_json["author"]),
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    nothing
 )
 
 
@@ -267,15 +268,15 @@ content_json = JSON.parse(
 )
 
 content_result = Content(
-    Nullable{String}(String(content_json["file_name"])),
-    Nullable{String}(String(content_json["file_path"])),
-    Nullable{Int}(Int(content_json["size"])),
-    Nullable{String}(String(content_json["encoding"])),
-    Nullable{String}(String(content_json["content"])),
-    Nullable{String}(String(content_json["ref"])),
-    Nullable{String}(String(content_json["blob_id"])),
-    Nullable{String}(String(content_json["commit_id"])),
-    Nullable{String}(String(content_json["last_commit_id"]))
+    content_json["file_name"],
+    content_json["file_path"],
+    content_json["size"],
+    content_json["encoding"],
+    content_json["content"],
+    content_json["ref"],
+    content_json["blob_id"],
+    content_json["commit_id"],
+    content_json["last_commit_id"]
 )
 
 @test Content(content_json) == content_result
@@ -315,26 +316,26 @@ status_json = JSON.parse(
 )
 
 status_result = Status(
-    Nullable{Int}(Int(status_json["id"])),
-    Nullable{Int}(),
-    Nullable{String}(),
-    Nullable{String}(),
-    Nullable{String}(),
-    Nullable{String}(String(status_json["sha"])),
-    Nullable{HttpCommon.URI}(),
-    Nullable{HttpCommon.URI}(),
-    Nullable{Dates.DateTime}(Dates.DateTime(status_json["created_at"])),
-    Nullable{Dates.DateTime}(),
-    Nullable{Owner}(),
-    Nullable{Repo}(),
-    Nullable{Vector{Status}}(),
-    Nullable{String}(String(status_json["status"])),
-    Nullable{String}(String(status_json["name"])),
-    Nullable{Owner}(Owner(status_json["author"])),
-    Nullable{String}(String(status_json["ref"])),
-    Nullable{Dates.DateTime}(),
-    Nullable{Dates.DateTime}(),
-    Nullable{Bool}(Bool(status_json["allow_failure"]))
+    status_json["id"],
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    status_json["sha"],
+    nothing,
+    nothing,
+    DateTime(status_json["created_at"]),
+    nothing,
+    nothing,
+    nothing,
+    nothing,
+    status_json["status"],
+    status_json["name"],
+    Owner(status_json["author"]),
+    status_json["ref"],
+    nothing,
+    nothing,
+    status_json["allow_failure"]
 )
 
 @test Status(status_json) == status_result
@@ -385,29 +386,29 @@ pr_json = JSON.parse(
 )
 
 pr_result = PullRequest(
-    Nullable{Int}(Int(pr_json["id"])),
-    Nullable{Int}(Int(pr_json["iid"])),
-    Nullable{Int}(Int(pr_json["project_id"])),
-    Nullable{String}(String(pr_json["title"])),
-    Nullable{String}(String(pr_json["description"])),
-    Nullable{String}(String(pr_json["state"])),
-    Nullable{Dates.DateTime}(Dates.DateTime(pr_json["created_at"])),
-    Nullable{Dates.DateTime}(Dates.DateTime(pr_json["updated_at"])),
-    Nullable{String}(String(pr_json["target_branch"])),
-    Nullable{String}(String(pr_json["source_branch"])),
-    Nullable{Int}(Int(pr_json["upvotes"])),
-    Nullable{Int}(Int(pr_json["downvotes"])),
-    Nullable{Owner}(Owner(pr_json["author"])),
-    Nullable{Owner}(), ## assignee
-    Nullable{Int}(Int(pr_json["source_project_id"])),
-    Nullable{Int}(Int(pr_json["target_project_id"])),
-    Nullable{Vector{String}}(Vector{String}(pr_json["labels"])),
-    Nullable{Bool}(Bool(pr_json["work_in_progress"])),
-    Nullable{String}(), ## milestone
-    Nullable{Bool}(Bool(pr_json["merge_when_build_succeeds"])),
-    Nullable{String}(String(pr_json["merge_status"])),
-    Nullable{Bool}(Bool(pr_json["subscribed"])),
-    Nullable{Int}(Int(pr_json["user_notes_count"]))
+    pr_json["id"],
+    pr_json["iid"],
+    pr_json["project_id"],
+    pr_json["title"],
+    pr_json["description"],
+    pr_json["state"],
+    DateTime(pr_json["created_at"]),
+    DateTime(pr_json["updated_at"]),
+    pr_json["target_branch"],
+    pr_json["source_branch"],
+    pr_json["upvotes"],
+    pr_json["downvotes"],
+    Owner(pr_json["author"]),
+    nothing, ## assignee
+    pr_json["source_project_id"],
+    pr_json["target_project_id"],
+    pr_json["labels"]),
+    pr_json["work_in_progress"],
+    nothing, ## milestone
+    pr_json["merge_when_build_succeeds"],
+    pr_json["merge_status"],
+    pr_json["subscribed"],
+    pr_json["user_notes_count"]
 )
 
 @test PullRequest(pr_json) == pr_result
@@ -458,20 +459,20 @@ issue_json = JSON.parse(
 )
 
 issue_result = Issue(
-    Nullable{Int}(Int(issue_json["id"])),
-    Nullable{Int}(Int(issue_json["iid"])),
-    Nullable{Int}(Int(issue_json["project_id"])),
-    Nullable{String}(String(issue_json["title"])),
-    Nullable{String}(String(issue_json["description"])),
-    Nullable{String}(String(issue_json["state"])),
-    Nullable{Dates.DateTime}(Dates.DateTime(issue_json["created_at"])),
-    Nullable{Dates.DateTime}(Dates.DateTime(issue_json["updated_at"])),
-    Nullable{Vector{String}}(Vector{String}(issue_json["labels"])),
-    Nullable{String}(), ## milestone
-    Nullable{Owner}(Owner(issue_json["assignee"])),
-    Nullable{Owner}(Owner(issue_json["author"])),
-    Nullable{Bool}(Bool(issue_json["subscribed"])),
-    Nullable{Int}(Int(issue_json["user_notes_count"]))
+    issue_json["id"],
+    issue_json["iid"],
+    issue_json["project_id"],
+    issue_json["title"],
+    issue_json["description"],
+    issue_json["state"],
+    DateTime(issue_json["created_at"]),
+    DateTime(issue_json["updated_at"]),
+    issue_json["labels"]),
+    nothing, ## milestone
+    Owner(issue_json["assignee"]),
+    Owner(issue_json["author"]),
+    issue_json["subscribed"],
+    issue_json["user_notes_count"]
 )
 
 @test Issue(issue_json) == issue_result
