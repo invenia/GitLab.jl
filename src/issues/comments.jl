@@ -37,9 +37,9 @@ type Comment <: GitLabType
     user::Nullable{Owner}
 =#
 
-#= 
+#=
     ## Issue comment
-    {   
+    {
         "note": "Test ...",
         "path": null,
         "line": null,
@@ -47,7 +47,7 @@ type Comment <: GitLabType
         "author": {
           "name": "Pradeep",
           "username": "mdpradeep",
-          "id": 2, 
+          "id": 2,
           "state": "active",
           "avatar_url": "http://www.gravatar.com/avatar/7e32a35a20817e0258e12665c9099422?s=80&d=identicon",
           "web_url": "http://104.197.141.88/u/mdpradeep"

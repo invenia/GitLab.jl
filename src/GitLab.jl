@@ -76,7 +76,7 @@ export  # repositories.jl
         add_collaborator,
         remove_collaborator,
         stats
-    
+
 export  # contents.jl
         Content,
         file,
@@ -91,7 +91,7 @@ export  # commits.jl
         Commit,
         commit,
         commits
-    
+
 export  # branches.jl
         Branch,
         branch,
@@ -119,7 +119,7 @@ export  # pull_requests.jl
         PullRequest,
         pull_requests,
         pull_request
-    
+
 export  # issues.jl
         Issue,
         issue,
@@ -155,7 +155,7 @@ export  # activity.jl
         watched,
         watch,
         unwatch
-    
+
 export  # events/events.jl
         WebhookEvent
 

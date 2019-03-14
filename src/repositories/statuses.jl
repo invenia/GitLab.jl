@@ -14,7 +14,7 @@ type Status <: GitLabType
     created_at::Nullable{Dates.DateTime}
     updated_at::Nullable{Dates.DateTime}
     creator::Nullable{Owner}
-    repository::Nullable{Repo} 
+    repository::Nullable{Repo}
     statuses::Nullable{Vector{Status}}
 
     ## For commit status

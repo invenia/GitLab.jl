@@ -10,7 +10,7 @@ type Owner <: GitLabType
     state::Nullable{GitLabString}
     avatar_url::Nullable{HttpCommon.URI}
     web_url::Nullable{HttpCommon.URI}
-    ownership_type::Nullable{GitLabString} 
+    ownership_type::Nullable{GitLabString}
 
 #=
     email::Nullable{GitLabString}
@@ -35,14 +35,14 @@ type Owner <: GitLabType
 =#
 end
 
-function Owner(data::Dict) 
+function Owner(data::Dict)
     o = json2gitlab(Owner, data)
     isnull(o.username) ? o.ownership_type = Nullable("Organization") : o.ownership_type = Nullable("User")
     o
 end
 
 Owner(username::AbstractString, isorg = false) = Owner(
-    Dict("username" => isorg ? "" : username, 
+    Dict("username" => isorg ? "" : username,
          "name" => isorg ? username : "",
          "ownership_type" => isorg ? "Organization" : "User"))
 ## Owner(username::AbstractString) = Owner(Dict("username" => username))
@@ -83,7 +83,7 @@ function orgs(owner; options...)
     return map(Owner, results), page_data
 end
 
-#= TODO: There seems to be no equivalent for these APIs 
+#= TODO: There seems to be no equivalent for these APIs
 function followers(owner; options...)
     results, page_data = gh_get_paged_json("/api/v3/users/$(name(owner))/followers"; options...)
     return map(Owner, results), page_data
