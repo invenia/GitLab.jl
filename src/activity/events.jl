@@ -75,11 +75,11 @@ immutable EventListener
     function EventListener(handle; auth::Authorization = AnonymousAuth(),
                            secret = nothing, events = nothing,
                            repos = nothing, forwards = nothing)
-        if !(isa(forwards, Void))
+        if forwards !== nothing
             forwards = map(HTTP.URI, forwards)
         end
 
-        if !(isa(repos, Void))
+        if repos !== nothing
             repos = map(name, repos)
         end
 
@@ -96,8 +96,8 @@ immutable EventListener
 
         server.http.events["listen"] = port -> begin
             println("Listening for GitLab events sent to $port;")
-            println("Whitelisted events: $(isa(events, Void) ? "All" : events)")
-            println("Whitelisted repos: $(isa(repos, Void) ? "All" : repos)")
+            println("Whitelisted events: $(something(events, "All"))")
+            println("Whitelisted repos: $(something(repos, "All"))")
         end
 
         return new(server)
@@ -115,24 +115,24 @@ function handle_event_request(request, handle;
     @show request.headers
     @show UTF8String(request.data)
     @show request.uri
-    if !(isa(secret, Void)) && !(has_valid_secret(request, secret))
+    if secret !== nothing && !(has_valid_secret(request, secret))
         ## MDP TODO
         println("FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         ## MDP return HTTP.Response(400, "invalid signature")
     end
     =#
 
-    if !(isa(events, Void)) && !(is_valid_event(request, events))
+    if events !== nothing && !(is_valid_event(request, events))
         return HTTP.Response(400, "invalid event")
     end
 
     event = event_from_payload!(event_header(request), Requests.json(request))
 
-    if !(isa(repos, Void)) && !(from_valid_repo(event, repos))
+    if repos !== nothing && !(from_valid_repo(event, repos))
         return HTTP.Response(400, "invalid repo")
     end
 
-    if !(isa(forwards, Void))
+    if forwards !== nothing
         for address in forwards
             Requests.post(address, request)
         end
