@@ -6,24 +6,24 @@ type PullRequest <: GitLabType
     id::Union{Int, Nothing}
     iid::Union{Int, Nothing}
     project_id::Union{Int, Nothing}
-    title::Union{GitLabString, Nothing}
-    description::Union{GitLabString, Nothing}
-    state::Union{GitLabString, Nothing}
+    title::Union{String, Nothing}
+    description::Union{String, Nothing}
+    state::Union{String, Nothing}
     created_at::Union{Dates.DateTime, Nothing}
     updated_at::Union{Dates.DateTime, Nothing}
-    target_branch::Union{GitLabString, Nothing}
-    source_branch::Union{GitLabString, Nothing}
+    target_branch::Union{String, Nothing}
+    source_branch::Union{String, Nothing}
     upvotes::Union{Int, Nothing}
     downvotes::Union{Int, Nothing}
     author::Union{Owner, Nothing}
     assignee::Union{Owner, Nothing}
     source_project_id::Union{Int, Nothing}
     target_project_id::Union{Int, Nothing}
-    labels::Union{Vector{GitLabString}, Nothing}
+    labels::Union{Vector{String}, Nothing}
     work_in_progress::Union{Bool, Nothing}
-    milestone::Union{GitLabString, Nothing}
+    milestone::Union{String, Nothing}
     merge_when_build_succeeds::Union{Bool, Nothing}
-    merge_status::Union{GitLabString, Nothing}
+    merge_status::Union{String, Nothing}
     subscribed::Union{Bool, Nothing}
     user_notes_count::Union{Int, Nothing}
 
@@ -37,7 +37,7 @@ type PullRequest <: GitLabType
     additions::Union{Int, Nothing}
     deletions::Union{Int, Nothing}
     changed_files::Union{Int, Nothing}
-    merge_commit_sha::Union{GitLabString, Nothing}
+    merge_commit_sha::Union{String, Nothing}
     closed_at::Union{Dates.DateTime, Nothing}
     merged_at::Union{Dates.DateTime, Nothing}
     url::Union{HttpCommon.URI, Nothing}

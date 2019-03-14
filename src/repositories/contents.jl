@@ -5,20 +5,20 @@
 
 
 type Content <: GitLabType
-    file_name::Union{GitLabString, Nothing}
-    file_path::Union{GitLabString, Nothing}
+    file_name::Union{String, Nothing}
+    file_path::Union{String, Nothing}
     size::Union{Int, Nothing}
-    encoding::Union{GitLabString, Nothing}
-    content::Union{GitLabString, Nothing}
-    ref::Union{GitLabString, Nothing}
-    blob_id::Union{GitLabString, Nothing}
-    commit_id::Union{GitLabString, Nothing}
-    last_commit_id::Union{GitLabString, Nothing}
+    encoding::Union{String, Nothing}
+    content::Union{String, Nothing}
+    ref::Union{String, Nothing}
+    blob_id::Union{String, Nothing}
+    commit_id::Union{String, Nothing}
+    last_commit_id::Union{String, Nothing}
 
 #=
-    typ::Union{GitLabString, Nothing}
-    name::Union{GitLabString, Nothing}
-    target::Union{GitLabString, Nothing}
+    typ::Union{String, Nothing}
+    name::Union{String, Nothing}
+    target::Union{String, Nothing}
     url::Union{HttpCommon.URI, Nothing}
     git_url::Union{HttpCommon.URI, Nothing}
     html_url::Union{HttpCommon.URI, Nothing}

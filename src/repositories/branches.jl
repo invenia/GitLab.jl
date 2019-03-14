@@ -3,13 +3,13 @@
 ###############
 
 type Branch <: GitLabType
-    name::Union{GitLabString, Nothing}
+    name::Union{String, Nothing}
     protected::Union{Bool, Nothing}
     commit::Union{Commit, Nothing}
 #=
-    label::Union{GitLabString, Nothing}
-    ref::Union{GitLabString, Nothing}
-    sha::Union{GitLabString, Nothing}
+    label::Union{String, Nothing}
+    ref::Union{String, Nothing}
+    sha::Union{String, Nothing}
     user::Union{Owner, Nothing}
     repo::Union{Repo, Nothing}
     _links::Union{Dict, Nothing}

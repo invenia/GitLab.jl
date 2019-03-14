@@ -3,25 +3,25 @@
 #############
 
 type Repo <: GitLabType
-    name::Union{GitLabString, Nothing}
+    name::Union{String, Nothing}
     visibility_level::Union{Int, Nothing}
     homepage::Union{HttpCommon.URI, Nothing}
     git_http_url::Union{HttpCommon.URI, Nothing}
-    description::Union{GitLabString, Nothing}
+    description::Union{String, Nothing}
     project_id::Union{Int, Nothing}
 
     id::Union{Int, Nothing}
-    default_branch::Union{GitLabString, Nothing}
-    tag_list::Union{Vector{GitLabString}, Nothing}
+    default_branch::Union{String, Nothing}
+    tag_list::Union{Vector{String}, Nothing}
     public::Union{Bool, Nothing}
     archived::Union{Bool, Nothing}
     ## TODO FIX ssh_url_to_repo::Union{HttpCommon.URI, Nothing}
     http_url_to_repo::Union{HttpCommon.URI, Nothing}
     web_url::Union{HttpCommon.URI, Nothing}
     owner::Union{Owner, Nothing}
-    name_with_namespace::Union{GitLabString, Nothing}
-    path::Union{GitLabString, Nothing}
-    path_with_namespace::Union{GitLabString, Nothing}
+    name_with_namespace::Union{String, Nothing}
+    path::Union{String, Nothing}
+    path_with_namespace::Union{String, Nothing}
     issues_enabled::Union{Bool, Nothing}
     merge_requests_enabled::Union{Bool, Nothing}
     wiki_enabled::Union{Bool, Nothing}
@@ -38,7 +38,7 @@ type Repo <: GitLabType
     star_count::Union{Int, Nothing}
     forks_count::Union{Int, Nothing}
     open_issues_count::Union{Int, Nothing}
-    runners_token::Union{GitLabString, Nothing}
+    runners_token::Union{String, Nothing}
     public_builds::Union{Bool, Nothing}
     ## TODO permissions::Union{Permissions, Nothing}
     ## \"permissions\":{\"project_access\":{\"access_level\":40,\"notification_level\":3},\"group_access\":null}

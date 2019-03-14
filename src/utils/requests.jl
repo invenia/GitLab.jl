@@ -76,7 +76,7 @@ function gitlab_paged_get(endpoint; page_limit = Inf, start_page = "", handle_er
         r = Requests.get(start_page, headers = headers)
     end
     results = HttpCommon.Response[r]
-    page_data = Dict{GitLabString, GitLabString}()
+    page_data = Dict{String, String}()
     if has_page_links(r)
         page_count = 1
         while page_count < page_limit

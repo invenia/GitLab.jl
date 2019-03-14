@@ -5,7 +5,7 @@
 abstract Authorization
 
 immutable OAuth2 <: Authorization
-    token::GitLabString
+    token::String
 end
 
 immutable AnonymousAuth <: Authorization end

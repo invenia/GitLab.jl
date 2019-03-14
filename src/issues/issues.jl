@@ -6,14 +6,14 @@ type Issue <: GitLabType
     id::Union{Int, Nothing}
     iid::Union{Int, Nothing}
     project_id::Union{Int, Nothing}
-    title::Union{GitLabString, Nothing}
-    description::Union{GitLabString, Nothing}
-    state::Union{GitLabString, Nothing}
+    title::Union{String, Nothing}
+    description::Union{String, Nothing}
+    state::Union{String, Nothing}
     created_at::Union{Dates.DateTime, Nothing}
     updated_at::Union{Dates.DateTime, Nothing}
     ## labels::Union{Vector{Dict}, Nothing}
-    labels::Union{Vector{GitLabString}, Nothing}
-    milestone::Union{GitLabString, Nothing}
+    labels::Union{Vector{String}, Nothing}
+    milestone::Union{String, Nothing}
     assignee::Union{Owner, Nothing}
     author::Union{Owner, Nothing}
     subscribed::Union{Bool, Nothing}

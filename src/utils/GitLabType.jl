@@ -18,8 +18,6 @@
 
 abstract GitLabType
 
-typealias GitLabString Compat.UTF8String
-
 function @compat(Base.:(==))(a::GitLabType, b::GitLabType)
     if typeof(a) != typeof(b)
         return false

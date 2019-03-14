@@ -3,32 +3,32 @@
 ################
 
 type Comment <: GitLabType
-    noteable_type::Union{GitLabString, Nothing}
+    noteable_type::Union{String, Nothing}
     ## created_at::Union{Dates.DateTime, Nothing}
-    created_at::Union{GitLabString, Nothing}
+    created_at::Union{String, Nothing}
     line_code::Union{Int64, Nothing}
-    note::Union{GitLabString, Nothing}
+    note::Union{String, Nothing}
     author::Union{Owner, Nothing}
     author_id::Union{Int64, Nothing}
-    updated_by_id::Union{GitLabString, Nothing}
+    updated_by_id::Union{String, Nothing}
     noteable_id::Union{Int64, Nothing}
-    commit_id::Union{GitLabString, Nothing}
+    commit_id::Union{String, Nothing}
     system::Union{Bool, Nothing}
     url::Union{HttpCommon.URI, Nothing}
     is_award::Union{Bool, Nothing}
-    st_diff::Union{GitLabString, Nothing}
+    st_diff::Union{String, Nothing}
     id::Union{Int64, Nothing}
     ## updated_at::Union{Dates.DateTime, Nothing}
-    updated_at::Union{GitLabString, Nothing}
+    updated_at::Union{String, Nothing}
     project_id::Union{Int64, Nothing}
-    attachment::Union{GitLabString, Nothing}
-    ## type::Union{GitLabString, Nothing}
-    path::Union{GitLabString, Nothing}
-    line::Union{GitLabString, Nothing}
-    line_type::Union{GitLabString, Nothing}
+    attachment::Union{String, Nothing}
+    ## type::Union{String, Nothing}
+    path::Union{String, Nothing}
+    line::Union{String, Nothing}
+    line_type::Union{String, Nothing}
 
 #=
-    original_commit_id::Union{GitLabString, Nothing}
+    original_commit_id::Union{String, Nothing}
     original_position::Union{Int, Nothing}
     position::Union{Int, Nothing}
     html_url::Union{HttpCommon.URI, Nothing}

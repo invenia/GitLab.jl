@@ -5,10 +5,10 @@
 type Status <: GitLabType
     id::Union{Int, Nothing}
     total_count::Union{Int, Nothing}
-    state::Union{GitLabString, Nothing}
-    description::Union{GitLabString, Nothing}
-    context::Union{GitLabString, Nothing}
-    sha::Union{GitLabString, Nothing}
+    state::Union{String, Nothing}
+    description::Union{String, Nothing}
+    context::Union{String, Nothing}
+    sha::Union{String, Nothing}
     url::Union{HttpCommon.URI, Nothing}
     target_url::Union{HttpCommon.URI, Nothing}
     created_at::Union{Dates.DateTime, Nothing}
@@ -18,10 +18,10 @@ type Status <: GitLabType
     statuses::Union{Vector{Status}, Nothing}
 
     ## For commit status
-    status::Union{GitLabString, Nothing}
-    name::Union{GitLabString, Nothing}
+    status::Union{String, Nothing}
+    name::Union{String, Nothing}
     author::Union{Owner, Nothing}
-    ref::Union{GitLabString, Nothing}
+    ref::Union{String, Nothing}
     started_at::Union{Dates.DateTime, Nothing}
     finished_at::Union{Dates.DateTime, Nothing}
     allow_failure::Union{Bool, Nothing}

@@ -3,20 +3,20 @@
 ###############
 
 type Commit <: GitLabType
-    id::Union{GitLabString, Nothing}
-    author_email::Union{GitLabString, Nothing}
-    title::Union{GitLabString, Nothing}
-    short_id::Union{GitLabString, Nothing}
-    message::Union{GitLabString, Nothing}
-    committer_name::Union{GitLabString, Nothing}
+    id::Union{String, Nothing}
+    author_email::Union{String, Nothing}
+    title::Union{String, Nothing}
+    short_id::Union{String, Nothing}
+    message::Union{String, Nothing}
+    committer_name::Union{String, Nothing}
     ## parents::Union{Vector{Commit}, Nothing}
     parent_ids::Union{Vector{Any}, Nothing}
-    authored_date::Union{GitLabString, Nothing}
-    committer_email::Union{GitLabString, Nothing}
+    authored_date::Union{String, Nothing}
+    committer_email::Union{String, Nothing}
     ## author_name::Union{Owner, Nothing}
-    author_name::Union{GitLabString, Nothing}
-    committed_date::Union{GitLabString, Nothing}
-    created_at::Union{GitLabString, Nothing}
+    author_name::Union{String, Nothing}
+    committed_date::Union{String, Nothing}
+    created_at::Union{String, Nothing}
 end
 
 Commit(data::Dict) = json2gitlab(Commit, data)

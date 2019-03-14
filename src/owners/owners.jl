@@ -4,20 +4,20 @@
 
 
 type Owner <: GitLabType
-    name::Union{GitLabString, Nothing}
-    username::Union{GitLabString, Nothing}
+    name::Union{String, Nothing}
+    username::Union{String, Nothing}
     id::Union{Int, Nothing}
-    state::Union{GitLabString, Nothing}
+    state::Union{String, Nothing}
     avatar_url::Union{HttpCommon.URI, Nothing}
     web_url::Union{HttpCommon.URI, Nothing}
-    ownership_type::Union{GitLabString, Nothing}
+    ownership_type::Union{String, Nothing}
 
 #=
-    email::Union{GitLabString, Nothing}
-    bio::Union{GitLabString, Nothing}
-    company::Union{GitLabString, Nothing}
-    location::Union{GitLabString, Nothing}
-    gravatar_id::Union{GitLabString, Nothing}
+    email::Union{String, Nothing}
+    bio::Union{String, Nothing}
+    company::Union{String, Nothing}
+    location::Union{String, Nothing}
+    gravatar_id::Union{String, Nothing}
     public_repos::Union{Int, Nothing}
     owned_private_repos::Union{Int, Nothing}
     total_private_repos::Union{Int, Nothing}
@@ -37,7 +37,8 @@ end
 
 function Owner(data::Dict)
     o = json2gitlab(Owner, data)
-    isnull(o.username) ? o.ownership_type = Nullable("Organization") : o.ownership_type = Nullable("User")
+    o.ownership_type = o.username === nothing ? "Organization"
+        o.ownership_type = Nullable("Organization") : o.ownership_type = Nullable("User")
     o
 end
 
