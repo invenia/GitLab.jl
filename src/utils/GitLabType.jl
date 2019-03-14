@@ -1,6 +1,7 @@
 ##############
 # GitLabType #
 ##############
+
 # A `GitLabType` is a Julia type representation of a JSON object defined by the
 # GitLab API. Generally:
 #
@@ -112,7 +113,7 @@ function gitlab2json(g::GitLabType)
     return results
 end
 
-function gitlab2json{K}(data::Dict{K})
+function gitlab2json(data::Dict{K}) where K
     results = Dict{K,Any}()
     for (key, val) in data
         results[key] = gitlab2json(val)
@@ -125,26 +126,26 @@ end
 ###################
 
 function Base.show(io::IO, g::GitLabType)
-    print(io, "$(typeof(g)) (all fields are Nullable):")
-    for field in fieldnames(g)
-        val = getfield(g, field)
-        if val !== nothing
-            println(io)
-            print(io, "  $field: ")
-            if isa(val, Vector)
-                print(io, typeof(val))
-            else
-                showcompact(io, val)
+    if ge(io, :compact, false)
+        print(io, "$(typeof(g)) (all fields are Nullable):")
+        for field in fieldnames(g)
+            val = getfield(g, field)
+            if val !== nothing
+                println(io)
+                print(io, "  $field: ")
+                if isa(val, Vector)
+                    print(io, typeof(val))
+                else
+                    show(IOContext(io, :compact => true), val)
+                end
             end
         end
-    end
-end
-
-function Base.showcompact(io::IO, g::GitLabType)
-    uri_id = namefield(g)
-    if uri_id === nothing
-        print(io, typeof(g), "(…)")
     else
-        print(io, typeof(g), "($(repr(uri_id)))")
+        uri_id = namefield(g)
+        if uri_id === nothing
+            print(io, typeof(g), "(…)")
+        else
+            print(io, typeof(g), "($(repr(uri_id)))")
+        end
     end
 end
