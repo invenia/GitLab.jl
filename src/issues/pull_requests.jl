@@ -40,8 +40,8 @@ struct PullRequest <: GitLabType
     merge_commit_sha::Union{String, Nothing}
     closed_at::Union{DateTime, Nothing}
     merged_at::Union{DateTime, Nothing}
-    url::Union{HttpCommon.URI, Nothing}
-    html_url::Union{HttpCommon.URI, Nothing}
+    url::Union{HTTP.URI, Nothing}
+    html_url::Union{HTTP.URI, Nothing}
     merged_by::Union{Owner, Nothing}
     _links::Union{Dict, Nothing}
     mergeable::Union{Bool, Nothing}

@@ -8,8 +8,8 @@ struct Owner <: GitLabType
     username::Union{String, Nothing}
     id::Union{Int, Nothing}
     state::Union{String, Nothing}
-    avatar_url::Union{HttpCommon.URI, Nothing}
-    web_url::Union{HttpCommon.URI, Nothing}
+    avatar_url::Union{HTTP.URI, Nothing}
+    web_url::Union{HTTP.URI, Nothing}
     ownership_type::Union{String, Nothing}
 
 #=
@@ -26,7 +26,7 @@ struct Owner <: GitLabType
     followers::Union{Int, Nothing}
     following::Union{Int, Nothing}
     collaborators::Union{Int, Nothing}
-    html_url::Union{HttpCommon.URI, Nothing}
+    html_url::Union{HTTP.URI, Nothing}
     updated_at::Union{DateTime, Nothing}
     created_at::Union{DateTime, Nothing}
     date::Union{DateTime, Nothing}

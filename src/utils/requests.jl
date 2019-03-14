@@ -3,9 +3,9 @@
 ####################
 
 const API_ENDPOINT = "API_ENDPOINT" in keys(ENV) ?
-    HttpCommon.URI(ENV["API_ENDPOINT"]) : HttpCommon.URI("http://104.197.141.88/")
+    HTTP.URI(ENV["API_ENDPOINT"]) : HTTP.URI("http://104.197.141.88/")
 
-api_uri(path) = HttpCommon.URI(API_ENDPOINT, path = path)
+api_uri(path) = HTTP.URI(API_ENDPOINT, path = path)
 
 #######################
 # GitLab REST Methods #
@@ -75,7 +75,7 @@ function gitlab_paged_get(endpoint; page_limit = Inf, start_page = "", handle_er
         @assert isempty(params) "`start_page` kwarg is incompatible with `params` kwarg"
         r = Requests.get(start_page, headers = headers)
     end
-    results = HttpCommon.Response[r]
+    results = HTTP.Response[r]
     page_data = Dict{String, String}()
     if has_page_links(r)
         page_count = 1
@@ -108,7 +108,7 @@ end
 # Error Handling #
 ##################
 
-function handle_response_error(r::HttpCommon.Response)
+function handle_response_error(r::HTTP.Response)
     if r.status >= 400
         message, docs_url, errors = "", "", ""
         try

@@ -5,8 +5,8 @@
 struct Repo <: GitLabType
     name::Union{String, Nothing}
     visibility_level::Union{Int, Nothing}
-    homepage::Union{HttpCommon.URI, Nothing}
-    git_http_url::Union{HttpCommon.URI, Nothing}
+    homepage::Union{HTTP.URI, Nothing}
+    git_http_url::Union{HTTP.URI, Nothing}
     description::Union{String, Nothing}
     project_id::Union{Int, Nothing}
 
@@ -15,9 +15,9 @@ struct Repo <: GitLabType
     tag_list::Union{Vector{String}, Nothing}
     public::Union{Bool, Nothing}
     archived::Union{Bool, Nothing}
-    ## TODO FIX ssh_url_to_repo::Union{HttpCommon.URI, Nothing}
-    http_url_to_repo::Union{HttpCommon.URI, Nothing}
-    web_url::Union{HttpCommon.URI, Nothing}
+    ## TODO FIX ssh_url_to_repo::Union{HTTP.URI, Nothing}
+    http_url_to_repo::Union{HTTP.URI, Nothing}
+    web_url::Union{HTTP.URI, Nothing}
     owner::Union{Owner, Nothing}
     name_with_namespace::Union{String, Nothing}
     path::Union{String, Nothing}
@@ -34,7 +34,7 @@ struct Repo <: GitLabType
     creator_id::Union{Int, Nothing}
     ## TODO FIX namespace::Union{Namespace, Nothing}
     ## \"namespace\":{\"id\":2,\"name\":\"mdpradeep\",\"path\":\"mdpradeep\",\"owner_id\":2,\"created_at\":\"2016-06-17T07:09:56.494Z\",\"updated_at\":\"2016-06-17T07:09:56.494Z\",\"description\":\"\",\"avatar\":null,\"share_with_group_lock\":false,\"visibility_level\":20}
-    avatar_url::Union{HttpCommon.URI, Nothing}
+    avatar_url::Union{HTTP.URI, Nothing}
     star_count::Union{Int, Nothing}
     forks_count::Union{Int, Nothing}
     open_issues_count::Union{Int, Nothing}

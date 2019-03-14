@@ -23,11 +23,11 @@ struct Issue <: GitLabType
     closed_by::Union{Owner, Nothing}
     closed_at::Union{DateTime, Nothing}
     pull_request::Union{PullRequest, Nothing}
-    url::Union{HttpCommon.URI, Nothing}
-    html_url::Union{HttpCommon.URI, Nothing}
-    labels_url::Union{HttpCommon.URI, Nothing}
-    comments_url::Union{HttpCommon.URI, Nothing}
-    events_url::Union{HttpCommon.URI, Nothing}
+    url::Union{HTTP.URI, Nothing}
+    html_url::Union{HTTP.URI, Nothing}
+    labels_url::Union{HTTP.URI, Nothing}
+    comments_url::Union{HTTP.URI, Nothing}
+    events_url::Union{HTTP.URI, Nothing}
     locked::Union{Bool, Nothing}
 =#
 end

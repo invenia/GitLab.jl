@@ -14,7 +14,7 @@ struct Comment <: GitLabType
     noteable_id::Union{Int64, Nothing}
     commit_id::Union{String, Nothing}
     system::Union{Bool, Nothing}
-    url::Union{HttpCommon.URI, Nothing}
+    url::Union{HTTP.URI, Nothing}
     is_award::Union{Bool, Nothing}
     st_diff::Union{String, Nothing}
     id::Union{Int64, Nothing}
@@ -31,9 +31,9 @@ struct Comment <: GitLabType
     original_commit_id::Union{String, Nothing}
     original_position::Union{Int, Nothing}
     position::Union{Int, Nothing}
-    html_url::Union{HttpCommon.URI, Nothing}
-    issue_url::Union{HttpCommon.URI, Nothing}
-    pull_request_url::Union{HttpCommon.URI, Nothing}
+    html_url::Union{HTTP.URI, Nothing}
+    issue_url::Union{HTTP.URI, Nothing}
+    pull_request_url::Union{HTTP.URI, Nothing}
     user::Union{Owner, Nothing}
 =#
 

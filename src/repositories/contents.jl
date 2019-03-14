@@ -17,10 +17,10 @@ struct Content <: GitLabType
     typ::Union{String, Nothing}
     name::Union{String, Nothing}
     target::Union{String, Nothing}
-    url::Union{HttpCommon.URI, Nothing}
-    git_url::Union{HttpCommon.URI, Nothing}
-    html_url::Union{HttpCommon.URI, Nothing}
-    download_url::Union{HttpCommon.URI, Nothing}
+    url::Union{HTTP.URI, Nothing}
+    git_url::Union{HTTP.URI, Nothing}
+    html_url::Union{HTTP.URI, Nothing}
+    download_url::Union{HTTP.URI, Nothing}
 =#
 end
 
@@ -71,7 +71,7 @@ function permalink(content::Content, commit)
     prefix = content.typ == "file" ? "blob" : "tree"
     rgx = Regex(string("\/", prefix, "\/.*?\/"))
     replacement = string("/", prefix, "/", name(commit), "/")
-    return HttpCommon.URI(replace(url, rgx, replacement))
+    return HTTP.URI(replace(url, rgx, replacement))
 end
 
 ###########################

@@ -96,7 +96,7 @@ end
 #############################################
 
 gitlab2json(val) = val
-gitlab2json(uri::HttpCommon.URI) = string(uri)
+gitlab2json(uri::HTTP.URI) = string(uri)
 gitlab2json(dt::DateTime) = string(dt) * "Z"
 gitlab2json(v::Vector) = [gitlab2json(i) for i in v]
 

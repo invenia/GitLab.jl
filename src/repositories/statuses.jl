@@ -9,8 +9,8 @@ struct Status <: GitLabType
     description::Union{String, Nothing}
     context::Union{String, Nothing}
     sha::Union{String, Nothing}
-    url::Union{HttpCommon.URI, Nothing}
-    target_url::Union{HttpCommon.URI, Nothing}
+    url::Union{HTTP.URI, Nothing}
+    target_url::Union{HTTP.URI, Nothing}
     created_at::Union{DateTime, Nothing}
     updated_at::Union{DateTime, Nothing}
     creator::Union{Owner, Nothing}

@@ -76,7 +76,7 @@ immutable EventListener
                            secret = nothing, events = nothing,
                            repos = nothing, forwards = nothing)
         if !(isa(forwards, Void))
-            forwards = map(HttpCommon.URI, forwards)
+            forwards = map(HTTP.URI, forwards)
         end
 
         if !(isa(repos, Void))
@@ -90,7 +90,7 @@ immutable EventListener
                                      repos = repos, forwards = forwards)
             catch err
                 println("SERVER ERROR: $err\n$(join(catch_stacktrace(), "\n"))")
-                return HttpCommon.Response(500)
+                return HTTP.Response(500)
             end
         end
 
@@ -118,18 +118,18 @@ function handle_event_request(request, handle;
     if !(isa(secret, Void)) && !(has_valid_secret(request, secret))
         ## MDP TODO
         println("FIX ME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        ## MDP return HttpCommon.Response(400, "invalid signature")
+        ## MDP return HTTP.Response(400, "invalid signature")
     end
     =#
 
     if !(isa(events, Void)) && !(is_valid_event(request, events))
-        return HttpCommon.Response(400, "invalid event")
+        return HTTP.Response(400, "invalid event")
     end
 
     event = event_from_payload!(event_header(request), Requests.json(request))
 
     if !(isa(repos, Void)) && !(from_valid_repo(event, repos))
-        return HttpCommon.Response(400, "invalid repo")
+        return HTTP.Response(400, "invalid repo")
     end
 
     if !(isa(forwards, Void))
@@ -193,14 +193,14 @@ function handle_comment(handle, event::WebhookEvent, auth::Authorization,
     elseif haskey(payload, "object_attributes")
         body_container = payload["object_attributes"]
     else
-        return HttpCommon.Response(204, "payload does not contain comment")
+        return HTTP.Response(204, "payload does not contain comment")
     end
 
     if check_collab
         repo = event.repository
         user = payload["user"]["username"]
         if !(iscollaborator(repo, user; params = Dict("private_token" => auth.token)))
-            return HttpCommon.Response(204, "commenter is not collaborator")
+            return HTTP.Response(204, "commenter is not collaborator")
         end
     end
 
@@ -208,7 +208,7 @@ function handle_comment(handle, event::WebhookEvent, auth::Authorization,
     trigger_match = match(trigger, body_container["note"])
 
     if trigger_match == nothing
-        return HttpCommon.Response(204, "trigger match not found")
+        return HTTP.Response(204, "trigger match not found")
     end
 
     return handle(event, trigger_match)

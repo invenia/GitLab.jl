@@ -45,8 +45,8 @@ owner_result = Owner(
     owner_json["username"],
     owner_json["id"],
     owner_json["state"],
-    HttpCommon.URI(""),
-    HttpCommon.URI(owner_json["web_url"]),
+    HTTP.URI(""),
+    HTTP.URI(owner_json["web_url"]),
     owner_json["ownership_type"]
 )
 
@@ -89,7 +89,7 @@ repo_result = Repo(
     repo_json["public"],
     nothing,
     nothing,
-    HttpCommon.URI(repo_json["web_url"]),
+    HTTP.URI(repo_json["web_url"]),
     Owner(repo_json["owner"]),
     nothing,
     nothing,

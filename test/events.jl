@@ -9,7 +9,7 @@ options = Dict("private_token" => myauth.token)
 mysecret = ENV["MY_SECRET"]
 myevents = ["Note Hook", "MergeRequest"]
 myrepos = [GitLab.repo_by_name("TestProject1"; headers=options)]
-myforwards = [HttpCommon.URI("http://myforward1.com"), "http://myforward2.com"] # can be HttpCommon.URIs or URI strings
+myforwards = [HTTP.URI("http://myforward1.com"), "http://myforward2.com"] # can be HTTP.URIs or URI strings
 
 # Set up Status parameters
 pending_params = Dict(
@@ -39,7 +39,7 @@ listener = GitLab.EventListener(auth = myauth,
     kind, payload, repo = event.kind, event.payload, event.repository
 
     if kind == "MergeRequest" && payload["action"] == "closed"
-        return HttpCommon.Response(200)
+        return HTTP.Response(200)
     end
 
     comment = GitLab.Comment(event.payload["object_attributes"])
@@ -57,12 +57,12 @@ listener = GitLab.EventListener(auth = myauth,
         println("Done !")
     catch err
         GitLab.create_status(repo, sha; headers = options, params = error_params(err))
-        return HttpCommon.Response(500)
+        return HTTP.Response(500)
     end
 
     GitLab.create_status(repo, sha; headers = options, params = success_params)
 
-    return HttpCommon.Response(200)
+    return HTTP.Response(200)
 end
 
 # Start the listener on localhost at port 8000
