@@ -2,7 +2,7 @@
 # Branch Type #
 ###############
 
-type Branch <: GitLabType
+struct Branch <: GitLabType
     name::Union{String, Nothing}
     protected::Union{Bool, Nothing}
     commit::Union{Commit, Nothing}

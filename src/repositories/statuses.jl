@@ -2,7 +2,7 @@
 # Status type #
 ###############
 
-type Status <: GitLabType
+struct Status <: GitLabType
     id::Union{Int, Nothing}
     total_count::Union{Int, Nothing}
     state::Union{String, Nothing}

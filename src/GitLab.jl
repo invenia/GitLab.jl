@@ -4,13 +4,10 @@ module GitLab
 # import #
 ##########
 
-import HttpCommon,
-       HttpServer,
-       JSON,
-       MbedTLS,
-      Requests
-
-using Dates
+using Dates,
+    HTTP,
+    JSON,
+    MbedTLS
 
 #############
 # Utilities #

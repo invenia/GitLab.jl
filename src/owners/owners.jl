@@ -3,7 +3,7 @@
 ##############
 
 
-type Owner <: GitLabType
+struct Owner <: GitLabType
     name::Union{String, Nothing}
     username::Union{String, Nothing}
     id::Union{Int, Nothing}

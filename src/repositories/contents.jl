@@ -2,9 +2,7 @@
 # Content Type #
 ################
 
-
-
-type Content <: GitLabType
+struct Content <: GitLabType
     file_name::Union{String, Nothing}
     file_path::Union{String, Nothing}
     size::Union{Int, Nothing}

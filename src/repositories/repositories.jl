@@ -2,7 +2,7 @@
 # Repo Type #
 #############
 
-type Repo <: GitLabType
+struct Repo <: GitLabType
     name::Union{String, Nothing}
     visibility_level::Union{Int, Nothing}
     homepage::Union{HttpCommon.URI, Nothing}

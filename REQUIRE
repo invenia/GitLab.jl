@@ -1,7 +1,4 @@
-julia 0.4
-
-JSON
-HttpServer
+julia 1.0
+HTTP
+JSON 0.8
 MbedTLS
-HttpCommon
-Requests

@@ -16,7 +16,7 @@
 # - A GitLabType's field types should be Nullables of either concrete types, a
 #   Vectors of concrete types, or Dicts.
 
-abstract GitLabType
+abstract type GitLabType end
 
 function Base.:(==)(a::GitLabType, b::GitLabType)
     if typeof(a) != typeof(b)
@@ -46,7 +46,7 @@ name(g::GitLabType) = namefield(g)
 # Converting JSON Dicts to GitLabTypes #
 ########################################
 
-function extract_nullable{T}(data::Dict, key, ::Type{T})
+function extract_nullable(data::Dict, key, ::Type{T}) where T
     if haskey(data, key)
         val = data[key]
         if val !== nothing
@@ -61,7 +61,7 @@ function extract_nullable{T}(data::Dict, key, ::Type{T})
     return nothing
 end
 
-prune_gitlab_value{T}(val, ::Type{T}) = T(val)
+prune_gitlab_value(val, ::Type{T}) where T = T(val)
 prune_gitlab_value(val, ::Type{DateTime}) = DateTime(chopz(val))
 
 # ISO 8601 allows for a trailing 'Z' to indicate that the given time is UTC.
@@ -79,7 +79,7 @@ end
 # dictionary into the type `G` with the expectation that the fieldnames of
 # `G` are keys of `data`, and the corresponding values can be converted to the
 # given field types.
-@generated function json2gitlab{G<:GitLabType}(::Type{G}, data::Dict)
+@generated function json2gitlab(::Type{G}, data::Dict) where G <: GitLabType
     types = G.types
     fields = fieldnames(G)
     args = Vector{Expr}(length(fields))

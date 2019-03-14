@@ -2,7 +2,7 @@
 # Comment Type #
 ################
 
-type Comment <: GitLabType
+struct Comment <: GitLabType
     noteable_type::Union{String, Nothing}
     ## created_at::Union{DateTime, Nothing}
     created_at::Union{String, Nothing}

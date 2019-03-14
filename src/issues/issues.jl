@@ -2,7 +2,7 @@
 # Issue type #
 ##############
 
-type Issue <: GitLabType
+struct Issue <: GitLabType
     id::Union{Int, Nothing}
     iid::Union{Int, Nothing}
     project_id::Union{Int, Nothing}

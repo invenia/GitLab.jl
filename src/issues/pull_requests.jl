@@ -2,7 +2,7 @@
 # PullRequest Type #
 ####################
 
-type PullRequest <: GitLabType
+struct PullRequest <: GitLabType
     id::Union{Int, Nothing}
     iid::Union{Int, Nothing}
     project_id::Union{Int, Nothing}

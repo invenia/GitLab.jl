@@ -2,7 +2,7 @@
 # Commit Type #
 ###############
 
-type Commit <: GitLabType
+struct Commit <: GitLabType
     id::Union{String, Nothing}
     author_email::Union{String, Nothing}
     title::Union{String, Nothing}
