@@ -29,11 +29,11 @@ listener = GitLab.CommentListener(trigger; auth = myauth) do event, phrase
 
     ## Send the results to the BenchmarkResults repository and get the link for the same.
     issue = GitLab.create_issue(benchmark_results_repo; headers=options, params = Dict("title" => "Benchmark Results"))
-    benchmark_reply_to = get(issue.id)
+    benchmark_reply_to = issue.id
 
     str_buf = IOBuffer(true, true)
-    print(str_buf, get(benchmark_results_repo.web_url))
-    issue_url = UTF8String(str_buf.data) * "/issues/$(get(issue.id))"
+    print(str_buf, benchmark_results_repo.web_url)
+    issue_url = UTF8String(str_buf.data) * "/issues/$(issue.id)"
 
     ## @show event.payload["object_attributes"]
     if event.payload["object_attributes"]["noteable_type"] == "Issue"
@@ -43,7 +43,7 @@ listener = GitLab.CommentListener(trigger; auth = myauth) do event, phrase
     elseif event.payload["object_attributes"]["noteable_type"] == "Commit"
         comment_params = Dict("note" => "<H2>Your benchmark results are available here - $(issue_url) </H2>")
         comment_kind = :commit
-        reply_to = get(comment.commit_id)
+        reply_to = comment.commit_id
     elseif event.payload["object_attributes"]["noteable_type"] == "MergeRequest"
         comment_params = Dict("body" => "<H2>Your benchmark results are available here - $(issue_url) </H2>")
         comment_kind = :review
@@ -59,7 +59,7 @@ listener = GitLab.CommentListener(trigger; auth = myauth) do event, phrase
     ## Update the issue with results
     benchmark_comment_params = Dict("body" => "<H2>Your benchmark results are available ! </H2> <code>$results<code>")
     GitLab.create_comment(benchmark_results_repo, benchmark_reply_to, :issue; headers = options, params = benchmark_comment_params)
-    
+
 
     # send the comment creation request to GitLab
     GitLab.create_comment(event.repository, reply_to, comment_kind; headers = options, params = comment_params)
@@ -69,6 +69,3 @@ end
 
 # Start the listener on localhost at port 8000
 GitLab.run(listener, host=IPv4(0,0,0,0), port=8000)
-
-
-

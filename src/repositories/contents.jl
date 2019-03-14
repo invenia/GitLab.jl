@@ -63,14 +63,14 @@ function delete_file(repo, path; options...)
 end
 
 function readme(repo; options...)
-    ## result = gh_get_json("/api/v3/projects/$(get(repo.id))/readme"; options...)
+    ## result = gh_get_json("/api/v3/projects/$(repo.id)/readme"; options...)
     result = gh_get_json(content_uri(repo, "README.md"); options...)
     return Content(result)
 end
 
 function permalink(content::Content, commit)
-    url = string(get(content.html_url))
-    prefix = get(content.typ) == "file" ? "blob" : "tree"
+    url = string(content.html_url)
+    prefix = content.typ == "file" ? "blob" : "tree"
     rgx = Regex(string("\/", prefix, "\/.*?\/"))
     replacement = string("/", prefix, "/", name(commit), "/")
     return HttpCommon.URI(replace(url, rgx, replacement))
@@ -80,10 +80,10 @@ end
 # Content Utility Methods #
 ###########################
 
-## content_uri(repo, path) = "/api/v3/projects/$(get(repo.id))/contents/$(name(path))"
-## content_uri(repo, path) = "/api/v3/projects/$(get(repo.id))/files"
-content_uri(repo, path, ref) = "/api/v3/projects/$(get(repo.id))/repository/files?file_path=$(name(path))&ref=$(name(ref))"
-content_uri(repo, path) = "/api/v3/projects/$(get(repo.id))/repository/files?file_path=$(name(path))&ref=master"
+## content_uri(repo, path) = "/api/v3/projects/$(repo.id))/contents/$(name(path)"
+## content_uri(repo, path) = "/api/v3/projects/$(repo.id)/files"
+content_uri(repo, path, ref) = "/api/v3/projects/$(repo.id))/repository/files?file_path=$(name(path))&ref=$(name(ref)"
+content_uri(repo, path) = "/api/v3/projects/$(repo.id))/repository/files?file_path=$(name(path)&ref=master"
 
 function build_content_response(json::Dict)
     results = Dict()

@@ -7,8 +7,6 @@ options = Dict("private_token" => myauth.token)
 myrepo = GitLab.repo_by_name("TestProject1"; headers=options)
 
 file = GitLab.file(myrepo, "src/file1", "master"; headers=options)
-@test get(file.file_path) == "src/file1"
+@test file.file_path == "src/file1"
 
 println("Content Tests Done !!!")
-
-

@@ -40,7 +40,7 @@ end
 # `namefield` is overloaded by various GitLabTypes to allow for more generic
 # input to AP functions that require a name to construct URI paths via `name`
 name(val) = val
-name(g::GitLabType) = get(namefield(g))
+name(g::GitLabType) = namefield(g)
 
 ########################################
 # Converting JSON Dicts to GitLabTypes #

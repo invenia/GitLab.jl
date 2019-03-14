@@ -60,11 +60,11 @@ namefield(pr::PullRequest) = pr.id
 ###############
 
 function pull_requests(repo::Repo; options...)
-    results, page_data = gh_get_paged_json("/api/v3/projects/$(get(repo.id))/merge_requests"; options...)
+    results, page_data = gh_get_paged_json("/api/v3/projects/$(repo.id)/merge_requests"; options...)
     return map(PullRequest, results), page_data
 end
 
 function pull_request(repo::Repo, pr::Int; options...)
-    result = gh_get_json("/api/v3/projects/$(get(repo.id))/merge_requests/$(pr)"; options...)
+    result = gh_get_json("/api/v3/projects/$(repo.id)/merge_requests/$(pr)"; options...)
     return PullRequest(result)
 end

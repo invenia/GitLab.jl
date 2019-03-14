@@ -10,10 +10,8 @@ myrepo = GitLab.repo_by_name("TestProject1"; headers=options)
 merge_requests, page_data = GitLab.pull_requests(myrepo; params=options)
 ## @show merge_requests
 
-merge_request = GitLab.pull_request(myrepo, get(merge_requests[1].id); params=options)
+merge_request = GitLab.pull_request(myrepo, merge_requests[1].id; params=options)
 ## @show merge_request
-@test get(merge_request.title) == "test"
+@test merge_request.title == "test"
 
 println("Merge Request Tests Done !!!")
-
-

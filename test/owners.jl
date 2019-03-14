@@ -15,7 +15,7 @@ own = GitLab.Owner(user_info)
 ## @show own
 
 name = GitLab.namefield(own)
-@test get(name) == user_info["username"] 
+@test name == user_info["username"]
 
 setindex!(options, "mdpradeep", "username")
 

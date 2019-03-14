@@ -42,7 +42,7 @@ ghjl = GitLab.repo_by_name("Calculus"; headers=options)
 ################
 
 # test GitLab.repo
-@test name(repo(get(ghjl.id); headers = options)) == name(ghjl)
+@test name(repo(ghjl.id; headers = options)) == name(ghjl)
 
 #= No equivalent API
 # test GitLab.forks
@@ -67,7 +67,7 @@ ghjl = GitLab.repo_by_name("Calculus"; headers=options)
 readme_file = file(ghjl, "README.md", "master"; headers = options)
 #= No equivalent API - directory()
 src_dir = first(directory(ghjl, "src"; headers = options))
-owners_dir = src_dir[findfirst(c -> get(c.path) == "src/owners", src_dir)]
+owners_dir = src_dir[findfirst(c -> c.path == "src/owners", src_dir)]
 test_sha = "eab14e1ab7b4de848ef6390101b6d40b489d5d08"
 readme_permalink = string(permalink(readme_file, test_sha))
 owners_permalink = string(permalink(owners_dir, test_sha))
@@ -98,11 +98,11 @@ test_repo = GitLab.repo_by_name("TestProject1"; headers=options)
 state_param = Dict("state" => "all")
 
 # test GitLab.pull_request, GitLab.pull_requests
-@test get(pull_request(test_repo, 3; headers = options).title) == "edit"
+@test pull_request(test_repo, 3; headers = options).title == "edit"
 @test hasghobj(3, first(pull_requests(test_repo; headers = options, params = state_param)))
 
 # test GitLab.issue, GitLab.issues
-@test get(issue(test_repo, 6; headers = options).title) == "This is a test"
+@test issue(test_repo, 6; headers = options).title == "This is a test"
 @test hasghobj(6, first(issues(test_repo; headers = options, params = state_param)))
 
 ############

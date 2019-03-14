@@ -8,10 +8,10 @@ options = Dict("private_token" => myauth.token)
 myrepo = GitLab.repo_by_name("TestProject1"; headers=options)
 ## @show myrepo
 
-@test get(GitLab.namefield(myrepo)) == "TestProject1"
+@test GitLab.namefield(myrepo) == "TestProject1"
 
 
-try ## remove this later 
+try ## remove this later
     forks = GitLab.forks(myrepo; params=options)
     @show forks
 end
@@ -65,7 +65,7 @@ result = GitLab.remove_collaborator(myrepo, "3", headers=options, params=user_da
 @test result.status == 200
 ## @show result
 
-try 
+try
     result = GitLab.remove_collaborator(myrepo, "999", headers=options, params=user_data)
     @test result.status == 200
     ## @show result
@@ -75,5 +75,3 @@ catch e
 end
 
 println("Repos Tests Done !!!")
-
-

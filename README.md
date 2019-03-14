@@ -307,7 +307,7 @@ listener = GitLab.CommentListener(trigger; auth = myauth, secret = mysecret) do 
         reply_to = event.payload["object_attributes"]["noteable_id"]
     elseif event.payload["object_attributes"]["noteable_type"] == "Commit"
         comment_kind = :commit
-        reply_to = get(comment.commit_id)
+        reply_to = comment.commit_id
     elseif event.payload["object_attributes"]["noteable_type"] == "MergeRequest"
         comment_kind = :review
         reply_to = event.payload["object_attributes"]["noteable_id"]
