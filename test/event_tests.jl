@@ -11,8 +11,8 @@ event = GitLab.event_from_payload!("Issue", event_json)
 # WebhookEvent #
 ################
 
-@test get(event.repository.name) == "Calculus"
-@test get(event.sender.username) == "mdpradeep"
+@test event.repository.name == "Calculus"
+@test event.sender.username == "mdpradeep"
 
 #################
 # EventListener #

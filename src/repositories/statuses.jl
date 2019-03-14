@@ -11,8 +11,8 @@ type Status <: GitLabType
     sha::Union{String, Nothing}
     url::Union{HttpCommon.URI, Nothing}
     target_url::Union{HttpCommon.URI, Nothing}
-    created_at::Union{Dates.DateTime, Nothing}
-    updated_at::Union{Dates.DateTime, Nothing}
+    created_at::Union{DateTime, Nothing}
+    updated_at::Union{DateTime, Nothing}
     creator::Union{Owner, Nothing}
     repository::Union{Repo, Nothing}
     statuses::Union{Vector{Status}, Nothing}
@@ -22,8 +22,8 @@ type Status <: GitLabType
     name::Union{String, Nothing}
     author::Union{Owner, Nothing}
     ref::Union{String, Nothing}
-    started_at::Union{Dates.DateTime, Nothing}
-    finished_at::Union{Dates.DateTime, Nothing}
+    started_at::Union{DateTime, Nothing}
+    finished_at::Union{DateTime, Nothing}
     allow_failure::Union{Bool, Nothing}
 end
 

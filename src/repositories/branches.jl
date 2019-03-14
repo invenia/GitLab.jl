@@ -20,7 +20,7 @@ end
 Branch(data::Dict) = json2gitlab(Branch, data)
 Branch(name::AbstractString) = Branch(Dict("name" => name))
 
-## namefield(branch::Branch) = isnull(branch.name) ? branch.ref : branch.name
+## namefield(branch::Branch) = branch.name === nothing ? branch.ref : branch.name
 namefield(branch::Branch) = branch.name
 
 ###############

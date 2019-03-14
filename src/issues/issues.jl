@@ -9,8 +9,8 @@ type Issue <: GitLabType
     title::Union{String, Nothing}
     description::Union{String, Nothing}
     state::Union{String, Nothing}
-    created_at::Union{Dates.DateTime, Nothing}
-    updated_at::Union{Dates.DateTime, Nothing}
+    created_at::Union{DateTime, Nothing}
+    updated_at::Union{DateTime, Nothing}
     ## labels::Union{Vector{Dict}, Nothing}
     labels::Union{Vector{String}, Nothing}
     milestone::Union{String, Nothing}
@@ -21,7 +21,7 @@ type Issue <: GitLabType
 
 #=
     closed_by::Union{Owner, Nothing}
-    closed_at::Union{Dates.DateTime, Nothing}
+    closed_at::Union{DateTime, Nothing}
     pull_request::Union{PullRequest, Nothing}
     url::Union{HttpCommon.URI, Nothing}
     html_url::Union{HttpCommon.URI, Nothing}

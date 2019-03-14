@@ -28,8 +28,8 @@ type Repo <: GitLabType
     builds_enabled::Union{Bool, Nothing}
     snippets_enabled::Union{Bool, Nothing}
     container_registry_enabled::Union{Bool, Nothing}
-    created_at::Union{Dates.DateTime, Nothing}
-    last_activity_at::Union{Dates.DateTime, Nothing}
+    created_at::Union{DateTime, Nothing}
+    last_activity_at::Union{DateTime, Nothing}
     shared_runners_enabled::Union{Bool, Nothing}
     creator_id::Union{Int, Nothing}
     ## TODO FIX namespace::Union{Namespace, Nothing}

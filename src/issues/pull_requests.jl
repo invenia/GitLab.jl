@@ -9,8 +9,8 @@ type PullRequest <: GitLabType
     title::Union{String, Nothing}
     description::Union{String, Nothing}
     state::Union{String, Nothing}
-    created_at::Union{Dates.DateTime, Nothing}
-    updated_at::Union{Dates.DateTime, Nothing}
+    created_at::Union{DateTime, Nothing}
+    updated_at::Union{DateTime, Nothing}
     target_branch::Union{String, Nothing}
     source_branch::Union{String, Nothing}
     upvotes::Union{Int, Nothing}
@@ -38,8 +38,8 @@ type PullRequest <: GitLabType
     deletions::Union{Int, Nothing}
     changed_files::Union{Int, Nothing}
     merge_commit_sha::Union{String, Nothing}
-    closed_at::Union{Dates.DateTime, Nothing}
-    merged_at::Union{Dates.DateTime, Nothing}
+    closed_at::Union{DateTime, Nothing}
+    merged_at::Union{DateTime, Nothing}
     url::Union{HttpCommon.URI, Nothing}
     html_url::Union{HttpCommon.URI, Nothing}
     merged_by::Union{Owner, Nothing}

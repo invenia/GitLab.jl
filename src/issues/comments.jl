@@ -4,7 +4,7 @@
 
 type Comment <: GitLabType
     noteable_type::Union{String, Nothing}
-    ## created_at::Union{Dates.DateTime, Nothing}
+    ## created_at::Union{DateTime, Nothing}
     created_at::Union{String, Nothing}
     line_code::Union{Int64, Nothing}
     note::Union{String, Nothing}
@@ -18,7 +18,7 @@ type Comment <: GitLabType
     is_award::Union{Bool, Nothing}
     st_diff::Union{String, Nothing}
     id::Union{Int64, Nothing}
-    ## updated_at::Union{Dates.DateTime, Nothing}
+    ## updated_at::Union{DateTime, Nothing}
     updated_at::Union{String, Nothing}
     project_id::Union{Int64, Nothing}
     attachment::Union{String, Nothing}

@@ -49,23 +49,23 @@ name(g::GitLabType) = get(namefield(g))
 function extract_nullable{T}(data::Dict, key, ::Type{T})
     if haskey(data, key)
         val = data[key]
-        if !(isa(val, Void))
+        if val !== nothing
             if T <: Vector
                 V = eltype(T)
-                return Nullable{T}(V[prune_gitlab_value(v, V) for v in val])
+                return V[prune_gitlab_value(v, V) for v in val]
             else
-                return Nullable{T}(prune_gitlab_value(val, T))
+                return prune_gitlab_value(val, T)
             end
         end
     end
-    return Nullable{T}()
+    return nothing
 end
 
 prune_gitlab_value{T}(val, ::Type{T}) = T(val)
-prune_gitlab_value(val, ::Type{Dates.DateTime}) = Dates.DateTime(chopz(val))
+prune_gitlab_value(val, ::Type{DateTime}) = DateTime(chopz(val))
 
 # ISO 8601 allows for a trailing 'Z' to indicate that the given time is UTC.
-# Julia's Dates.DateTime constructor doesn't support this, but GitLab's time
+# Julia's DateTime constructor doesn't support this, but GitLab's time
 # strings can contain it. This method ensures that a string's trailing 'Z',
 # if present, has been removed.
 function chopz(str::AbstractString)
@@ -97,16 +97,16 @@ end
 
 gitlab2json(val) = val
 gitlab2json(uri::HttpCommon.URI) = string(uri)
-gitlab2json(dt::Dates.DateTime) = string(dt) * "Z"
+gitlab2json(dt::DateTime) = string(dt) * "Z"
 gitlab2json(v::Vector) = [gitlab2json(i) for i in v]
 
 function gitlab2json(g::GitLabType)
     results = Dict()
     for field in fieldnames(g)
         val = getfield(g, field)
-        if !(isnull(val))
+        if val !== nothing
             key = field == :typ ? "type" : string(field)
-            results[key] = gitlab2json(get(val))
+            results[key] = gitlab2json(val)
         end
     end
     return results
@@ -128,14 +128,13 @@ function Base.show(io::IO, g::GitLabType)
     print(io, "$(typeof(g)) (all fields are Nullable):")
     for field in fieldnames(g)
         val = getfield(g, field)
-        if !(isnull(val))
-            gotval = get(val)
+        if val !== nothing
             println(io)
             print(io, "  $field: ")
-            if isa(gotval, Vector)
-                print(io, typeof(gotval))
+            if isa(val, Vector)
+                print(io, typeof(val))
             else
-                showcompact(io, gotval)
+                showcompact(io, val)
             end
         end
     end
@@ -143,9 +142,9 @@ end
 
 function Base.showcompact(io::IO, g::GitLabType)
     uri_id = namefield(g)
-    if isnull(uri_id)
+    if uri_id === nothing
         print(io, typeof(g), "(…)")
     else
-        print(io, typeof(g), "($(repr(get(uri_id))))")
+        print(io, typeof(g), "($(repr(uri_id)))")
     end
 end

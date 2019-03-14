@@ -27,9 +27,9 @@ type Owner <: GitLabType
     following::Union{Int, Nothing}
     collaborators::Union{Int, Nothing}
     html_url::Union{HttpCommon.URI, Nothing}
-    updated_at::Union{Dates.DateTime, Nothing}
-    created_at::Union{Dates.DateTime, Nothing}
-    date::Union{Dates.DateTime, Nothing}
+    updated_at::Union{DateTime, Nothing}
+    created_at::Union{DateTime, Nothing}
+    date::Union{DateTime, Nothing}
     hireable::Union{Bool, Nothing}
     site_admin::Union{Bool, Nothing}
 =#
@@ -37,8 +37,7 @@ end
 
 function Owner(data::Dict)
     o = json2gitlab(Owner, data)
-    o.ownership_type = o.username === nothing ? "Organization"
-        o.ownership_type = Nullable("Organization") : o.ownership_type = Nullable("User")
+    o.ownership_type = o.username === nothing ? "Organization" : "User"
     o
 end
 
@@ -58,7 +57,7 @@ typprefix(isorg) = isorg ? "projects" : "users"
 # Owner API #
 #############
 
-isorg(owner::Owner) = isnull(owner.ownership_type) ? true : get(owner.ownership_type, "") == "Organization"
+isorg(owner::Owner) = owner.ownership_type === nothing ? true : owner.ownership_type == "Organization"
 
 owner(owner_obj::Owner; options...) = owner(name(owner_obj), isorg(owner_obj); options...)
 
